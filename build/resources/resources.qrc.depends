@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../qml/Main.qml</file>
+        <file>../qml/Login.qml</file>
+        <file>../qml/Dashboard.qml</file>
+        <file>../maps/large_house_map.pgm</file>
+        <file>../maps/large_house_map.yaml</file>
+        <file>../maps/small_house2_map.pgm</file>
+        <file>../maps/small_house2_map.yaml</file>
+        <file>../maps/small_house1_map.pgm</file>
+        <file>../maps/small_house1_map.yaml</file>
+        <file>../images/arrow_down.png</file>
+        <file>../images/robot.png</file>
+    </qresource>
+</RCC>
+

@@ -1,0 +1,74 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(MyQmlProject LANGUAGES CXX)
+
+# Đặt tiêu chuẩn C++ 17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Tìm thư viện
+find_package(Qt5 COMPONENTS Quick WebSockets REQUIRED)
+find_package(yaml-cpp REQUIRED)
+
+# Thêm tất cả các tệp .cpp và .h vào danh sách SOURCES và HEADERS
+set(SOURCES
+    src/main.cpp
+    src/loginhandler.cpp
+    src/mainwindow.cpp
+    src/hermitecurve.cpp
+    src/rosbridgeclient.cpp
+    src/websocket/subscribeclient.cpp
+    src/websocket/publishclient.cpp
+    src/websocket/stringsubscribeclient.cpp
+    src/websocket/posesubscribeclient.cpp
+)
+
+set(HEADERS
+    include/loginhandler.h
+    include/mainwindow.h
+    include/hermitecurve.h
+    include/rosbridgeclient.h
+    include/websocket/subscribeclient.h
+    include/websocket/publishclient.h
+    include/websocket/stringsubscribeclient.h
+    include/websocket/posesubscribeclient.h
+)
+
+# Thêm tất cả các tệp .qml vào tài nguyên
+set(QML_FILES
+    qml/Main.qml
+    qml/Login.qml
+    qml/Dashboard.qml
+)
+
+# Generate MOC files for headers with Q_OBJECT
+qt5_wrap_cpp(MOC_SOURCES ${HEADERS})
+
+# Tạo tệp tài nguyên QRC từ các tệp .qml
+qt5_add_resources(RESOURCE_FILES
+    resources/resources.qrc
+)
+
+# Tạo ứng dụng Qt với các tệp nguồn và tài nguyên
+add_executable(MyQmlProject
+    ${SOURCES}
+    ${MOC_SOURCES}  # Thêm MOC files vào
+    ${RESOURCE_FILES}
+)
+
+# Liên kết thư viện Qt với ứng dụng
+target_link_libraries(MyQmlProject
+    PRIVATE Qt5::Quick
+    PRIVATE Qt5::WebSockets
+)
+
+# Bao gồm thư mục chứa header
+target_include_directories(MyQmlProject
+    PRIVATE include
+)
+
+# Đảm bảo Qt được liên kết đúng với ứng dụng
+target_link_libraries(MyQmlProject
+    PRIVATE Qt5::Core Qt5::Gui Qt5::Quick Qt5::WebSockets yaml-cpp
+)
+
