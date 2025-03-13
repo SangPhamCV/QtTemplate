@@ -57,25 +57,25 @@ include CMakeFiles/MyQmlProject.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MyQmlProject.dir/flags.make
 
+include/moc_hermitecurve.cpp: ../include/hermitecurve.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating include/moc_hermitecurve.cpp"
+	cd /home/sang/workspace/qt/template/build/include && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/moc_hermitecurve.cpp_parameters
+
 include/moc_loginhandler.cpp: ../include/loginhandler.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating include/moc_loginhandler.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating include/moc_loginhandler.cpp"
 	cd /home/sang/workspace/qt/template/build/include && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp_parameters
 
 include/moc_mainwindow.cpp: ../include/mainwindow.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating include/moc_mainwindow.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating include/moc_mainwindow.cpp"
 	cd /home/sang/workspace/qt/template/build/include && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp_parameters
-
-include/moc_hermitecurve.cpp: ../include/hermitecurve.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating include/moc_hermitecurve.cpp"
-	cd /home/sang/workspace/qt/template/build/include && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/moc_hermitecurve.cpp_parameters
 
 include/moc_rosbridgeclient.cpp: ../include/rosbridgeclient.h
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating include/moc_rosbridgeclient.cpp"
 	cd /home/sang/workspace/qt/template/build/include && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/moc_rosbridgeclient.cpp_parameters
 
-include/websocket/moc_subscribeclient.cpp: ../include/websocket/subscribeclient.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating include/websocket/moc_subscribeclient.cpp"
-	cd /home/sang/workspace/qt/template/build/include/websocket && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp_parameters
+include/websocket/moc_posesubscribeclient.cpp: ../include/websocket/posesubscribeclient.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating include/websocket/moc_posesubscribeclient.cpp"
+	cd /home/sang/workspace/qt/template/build/include/websocket && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp_parameters
 
 include/websocket/moc_publishclient.cpp: ../include/websocket/publishclient.h
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating include/websocket/moc_publishclient.cpp"
@@ -85,13 +85,18 @@ include/websocket/moc_stringsubscribeclient.cpp: ../include/websocket/stringsubs
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating include/websocket/moc_stringsubscribeclient.cpp"
 	cd /home/sang/workspace/qt/template/build/include/websocket && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/websocket/moc_stringsubscribeclient.cpp_parameters
 
-include/websocket/moc_posesubscribeclient.cpp: ../include/websocket/posesubscribeclient.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating include/websocket/moc_posesubscribeclient.cpp"
-	cd /home/sang/workspace/qt/template/build/include/websocket && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp_parameters
+include/websocket/moc_subscribeclient.cpp: ../include/websocket/subscribeclient.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating include/websocket/moc_subscribeclient.cpp"
+	cd /home/sang/workspace/qt/template/build/include/websocket && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp_parameters
+
+include/websocket/moc_viewmodel.cpp: ../include/websocket/viewmodel.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating include/websocket/moc_viewmodel.cpp"
+	cd /home/sang/workspace/qt/template/build/include/websocket && /usr/lib/qt5/bin/moc @/home/sang/workspace/qt/template/build/include/websocket/moc_viewmodel.cpp_parameters
 
 qrc_resources.cpp: ../qml/Main.qml
 qrc_resources.cpp: ../qml/Login.qml
 qrc_resources.cpp: ../qml/Dashboard.qml
+qrc_resources.cpp: ../qml/CustomButton.qml
 qrc_resources.cpp: ../maps/large_house_map.pgm
 qrc_resources.cpp: ../maps/large_house_map.yaml
 qrc_resources.cpp: ../maps/small_house2_map.pgm
@@ -102,51 +107,12 @@ qrc_resources.cpp: ../images/arrow_down.png
 qrc_resources.cpp: ../images/robot.png
 qrc_resources.cpp: resources/resources.qrc.depends
 qrc_resources.cpp: ../resources/resources.qrc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating qrc_resources.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating qrc_resources.cpp"
 	/usr/lib/qt5/bin/rcc --name resources --output /home/sang/workspace/qt/template/build/qrc_resources.cpp /home/sang/workspace/qt/template/resources/resources.qrc
-
-CMakeFiles/MyQmlProject.dir/src/main.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MyQmlProject.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/main.cpp.o -c /home/sang/workspace/qt/template/src/main.cpp
-
-CMakeFiles/MyQmlProject.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/main.cpp > CMakeFiles/MyQmlProject.dir/src/main.cpp.i
-
-CMakeFiles/MyQmlProject.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/main.cpp -o CMakeFiles/MyQmlProject.dir/src/main.cpp.s
-
-CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o: ../src/loginhandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o -c /home/sang/workspace/qt/template/src/loginhandler.cpp
-
-CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/loginhandler.cpp > CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.i
-
-CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/loginhandler.cpp -o CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.s
-
-CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o: ../src/mainwindow.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o -c /home/sang/workspace/qt/template/src/mainwindow.cpp
-
-CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/mainwindow.cpp > CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i
-
-CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/mainwindow.cpp -o CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s
 
 CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o: ../src/hermitecurve.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o -c /home/sang/workspace/qt/template/src/hermitecurve.cpp
 
 CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.i: cmake_force
@@ -157,9 +123,48 @@ CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/hermitecurve.cpp -o CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.s
 
+CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o: ../src/loginhandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o -c /home/sang/workspace/qt/template/src/loginhandler.cpp
+
+CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/loginhandler.cpp > CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.i
+
+CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/loginhandler.cpp -o CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.s
+
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MyQmlProject.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/main.cpp.o -c /home/sang/workspace/qt/template/src/main.cpp
+
+CMakeFiles/MyQmlProject.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/main.cpp > CMakeFiles/MyQmlProject.dir/src/main.cpp.i
+
+CMakeFiles/MyQmlProject.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/main.cpp -o CMakeFiles/MyQmlProject.dir/src/main.cpp.s
+
+CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o: ../src/mainwindow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o -c /home/sang/workspace/qt/template/src/mainwindow.cpp
+
+CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/mainwindow.cpp > CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i
+
+CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/mainwindow.cpp -o CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s
+
 CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o: ../src/rosbridgeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o -c /home/sang/workspace/qt/template/src/rosbridgeclient.cpp
 
 CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.i: cmake_force
@@ -170,22 +175,22 @@ CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/rosbridgeclient.cpp -o CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.s
 
-CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o: ../src/websocket/subscribeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o -c /home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o: ../src/websocket/posesubscribeclient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o -c /home/sang/workspace/qt/template/src/websocket/posesubscribeclient.cpp
 
-CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp > CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i
+CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/websocket/posesubscribeclient.cpp > CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i
 
-CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s
+CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/websocket/posesubscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s
 
 CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o: ../src/websocket/publishclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o -c /home/sang/workspace/qt/template/src/websocket/publishclient.cpp
 
 CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.i: cmake_force
@@ -198,7 +203,7 @@ CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.s: cmake_force
 
 CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o: ../src/websocket/stringsubscribeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o -c /home/sang/workspace/qt/template/src/websocket/stringsubscribeclient.cpp
 
 CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.i: cmake_force
@@ -209,44 +214,31 @@ CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.s: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/websocket/stringsubscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.s
 
-CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o: ../src/websocket/posesubscribeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o -c /home/sang/workspace/qt/template/src/websocket/posesubscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o: ../src/websocket/subscribeclient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o -c /home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp
 
-CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/websocket/posesubscribeclient.cpp > CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i
+CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp > CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i
 
-CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/websocket/posesubscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s
+CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s
 
-CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o: include/moc_loginhandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o -c /home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp
+CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: ../src/websocket/viewmodel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o -c /home/sang/workspace/qt/template/src/websocket/viewmodel.cpp
 
-CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp > CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.i
+CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/src/websocket/viewmodel.cpp > CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.i
 
-CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp -o CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s
-
-CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o: include/moc_mainwindow.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o -c /home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp
-
-CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp > CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i
-
-CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp -o CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s
+CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/src/websocket/viewmodel.cpp -o CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.s
 
 CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.o: include/moc_hermitecurve.cpp
@@ -261,9 +253,35 @@ CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/moc_hermitecurve.cpp -o CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.s
 
+CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o: include/moc_loginhandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o -c /home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp
+
+CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp > CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.i
+
+CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/moc_loginhandler.cpp -o CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s
+
+CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o: include/moc_mainwindow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o -c /home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp
+
+CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp > CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i
+
+CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/moc_mainwindow.cpp -o CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s
+
 CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o: include/moc_rosbridgeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o -c /home/sang/workspace/qt/template/build/include/moc_rosbridgeclient.cpp
 
 CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.i: cmake_force
@@ -274,22 +292,22 @@ CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/moc_rosbridgeclient.cpp -o CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.s
 
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o: include/websocket/moc_subscribeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o: include/websocket/moc_posesubscribeclient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp
 
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp > CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp > CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i
 
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s
 
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o: include/websocket/moc_publishclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_publishclient.cpp
 
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.i: cmake_force
@@ -302,7 +320,7 @@ CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.s: cmake_for
 
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o: include/websocket/moc_stringsubscribeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_stringsubscribeclient.cpp
 
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.i: cmake_force
@@ -313,22 +331,35 @@ CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/websocket/moc_stringsubscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.s
 
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o: include/websocket/moc_posesubscribeclient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o: include/websocket/moc_subscribeclient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp
 
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp > CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp > CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i
 
-CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/websocket/moc_posesubscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s
+
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: include/websocket/moc_viewmodel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o -c /home/sang/workspace/qt/template/build/include/websocket/moc_viewmodel.cpp
+
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sang/workspace/qt/template/build/include/websocket/moc_viewmodel.cpp > CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.i
+
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sang/workspace/qt/template/build/include/websocket/moc_viewmodel.cpp -o CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.s
 
 CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o: CMakeFiles/MyQmlProject.dir/flags.make
 CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o: qrc_resources.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o -c /home/sang/workspace/qt/template/build/qrc_resources.cpp
 
 CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.i: cmake_force
@@ -341,45 +372,49 @@ CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.s: cmake_force
 
 # Object files for target MyQmlProject
 MyQmlProject_OBJECTS = \
-"CMakeFiles/MyQmlProject.dir/src/main.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/src/main.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o" \
-"CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o" \
+"CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o" \
 "CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o"
 
 # External object files for target MyQmlProject
 MyQmlProject_EXTERNAL_OBJECTS =
 
-MyQmlProject: CMakeFiles/MyQmlProject.dir/src/main.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/src/main.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/include/moc_hermitecurve.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o
-MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o
+MyQmlProject: CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o
 MyQmlProject: CMakeFiles/MyQmlProject.dir/build.make
 MyQmlProject: /usr/lib/x86_64-linux-gnu/libQt5Quick.so.5.12.8
@@ -390,7 +425,7 @@ MyQmlProject: /usr/lib/x86_64-linux-gnu/libQt5Qml.so.5.12.8
 MyQmlProject: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.12.8
 MyQmlProject: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.12.8
 MyQmlProject: CMakeFiles/MyQmlProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX executable MyQmlProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sang/workspace/qt/template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX executable MyQmlProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MyQmlProject.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -402,14 +437,15 @@ CMakeFiles/MyQmlProject.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/MyQmlProject.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/MyQmlProject.dir/clean
 
+CMakeFiles/MyQmlProject.dir/depend: include/moc_hermitecurve.cpp
 CMakeFiles/MyQmlProject.dir/depend: include/moc_loginhandler.cpp
 CMakeFiles/MyQmlProject.dir/depend: include/moc_mainwindow.cpp
-CMakeFiles/MyQmlProject.dir/depend: include/moc_hermitecurve.cpp
 CMakeFiles/MyQmlProject.dir/depend: include/moc_rosbridgeclient.cpp
-CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_subscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_posesubscribeclient.cpp
 CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_publishclient.cpp
 CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_stringsubscribeclient.cpp
-CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_posesubscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_subscribeclient.cpp
+CMakeFiles/MyQmlProject.dir/depend: include/websocket/moc_viewmodel.cpp
 CMakeFiles/MyQmlProject.dir/depend: qrc_resources.cpp
 	cd /home/sang/workspace/qt/template/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sang/workspace/qt/template /home/sang/workspace/qt/template /home/sang/workspace/qt/template/build /home/sang/workspace/qt/template/build /home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/MyQmlProject.dir/depend

@@ -23,13 +23,13 @@ Rectangle {
 
     property var mapResolution: None
     property var mapOrigin: []
-
-    property var robotPose: rosBridgeClientQML.topicData["/amcl_pose"]
+    // property var robotPose: rosBridgeClientQML.topicData["/amcl_pose"]
+    property var robotPose: viewModelQML.robotPose
 
     property real robotX: 0
     property real robotY: 0
 
-    function robotPoseFunction() {
+    function updateRobotPose() {
         if (!mapOrigin || !mapResolution || !robotPose) return;
 
         let newX = (robotPose.position_x - mapOrigin[0]) / mapResolution;
@@ -47,24 +47,6 @@ Rectangle {
         } else {
             hermiteCurveQML.updatePoint(0, newXX, newYY);
             dashboard.clickedPoints[0] = {x: newXX, y: newYY};
-        }
-
-        hermiteCurveQML.createCurve();
-        canvasMapImage.requestPaint();
-        console.log("robotY:", newYY, "clickedPoints[0].y:", dashboard.clickedPoints[0].y);
-    }
-
-    Timer {
-        id: amclPoseCheckTimer
-        interval: 100  // Kiểm tra mỗi 100ms
-        running: false  // Chạy ngay khi chương trình khởi động
-        repeat: true
-        onTriggered: {
-            let poseData = rosBridgeClientQML.topicData["/amcl_pose"];
-            if (poseData && poseData.position_x !== undefined && poseData.position_y !== undefined) {
-                dashboard.robotPoseFunction();
-                amclPoseCheckTimer.stop();
-            }
         }
     }
 
@@ -177,7 +159,13 @@ Rectangle {
 
             dashboard.clickedPoints = [];
             hermiteCurveQML.clearLamdmarkPoints();
-            amclPoseCheckTimer.start();
+            updateRobotPose();
+
+            hermiteCurveQML.createCurve();
+            canvasMapImage.requestPaint();
+
+            viewModelQML.onImageLoader(mapImage.width, mapImage.height, mapImage.sourceSize.width, mapImage.sourceSize.height);                   
+
         }
     }
 
@@ -264,6 +252,43 @@ Rectangle {
         onClicked: Qt.quit()
     }
 
+    // Navigate Button
+    CustomButton {
+        id: startNavigateButton
+        width: (imageCamera.width - componentMargin) * 0.5
+        height: imageCamera.height * 0.25
+        anchors.left: imageCamera.left
+        anchors.bottom: imageCamera.top
+        anchors.bottomMargin: componentMargin
+
+        text: "Start \n Navigate"
+        normalColor: "#2ecc71" 
+        hoverColor: "#27ae60"
+        borderColor: "#1e8449"
+        onClicked: {
+            viewModelQML.sendMoveCommand("start");
+        }
+    }
+
+    // Stop Navigate Button
+    CustomButton {
+        id: stopNavigateButton
+        width: startNavigateButton.width
+        height: startNavigateButton.height
+        anchors.right: imageCamera.right
+        anchors.bottom: imageCamera.top
+        anchors.bottomMargin: componentMargin
+
+        text: "Stop \n Navigate"
+        normalColor: "#e74c3c" 
+        hoverColor: "#c0392b"
+        borderColor: "#962d22"
+        onClicked: {
+            viewModelQML.sendMoveCommand("stop");
+        }        
+    }
+
+
     // Teleop Joystick
     Rectangle {
         id: teleopJoystick
@@ -294,7 +319,7 @@ Rectangle {
             Text {
                 text: "Pos X: " + (robotPose.position_x).toFixed(2) + 
                     "\nPos Y: " + (robotPose.position_y).toFixed(2) +
-                    "\nPos Y: " + (robotPose.angular_yaw).toFixed(2)                  
+                    "\nPos Angular: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2)                 
             }
         }
 
@@ -344,23 +369,63 @@ Rectangle {
         anchors.left: teleopJoystick.left
         anchors.bottomMargin: parentMargin
 
-        radius: 12
-        border.width: 2
-        border.color: "#BDBDBD"
-        color: "#FFFFFF"
+        clip: true
 
-        Text {
-            text: "TELEOP JOYSTICK"
-            color: "#37474F"
-            font.pixelSize: parent.height * 0.05
-            font.bold: true
+        Rectangle {
+            id: titleDestination
+            width: goalButtonRectangle.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: parent.height * 0.1
+            anchors.bottom: goalButtonRectangle.top
+            color: "#1fcf7d"
+            Text {
+                text: "Destination"
+                color: "#37474F"
+                font.bold: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Rectangle {
+            id: goalButtonRectangle
+            width: parent.width
+            height: width
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            border.color: "#BDBDBD"
+            color: "#FFFFFF"
+
+            Grid {
+                id: goalButtonGrid
+                columns: 2
+                rows: 5
+                spacing: parent.height * 0.05
+                anchors.fill: parent
+                anchors.margins: parent.height * 0.1
+
+                Repeater {
+                    model: 10
+                    CustomButton {
+                        text: "Goal " + (index + 1)
+                        width: (goalButtonGrid.width - goalButtonGrid.spacing) / 2
+                        height: goalButtonRectangle.height * 0.12
+                        onClicked: {
+                            viewModelQML.sendGoal(index);
+                        }
+                    }
+                }
+                Connections {
+                    target: viewModelQML
+                    onWaypointsChanged: {
+                        canvasMapImage.requestPaint();
+                    }
+                }
+            }
         }
     }
 
-    // Image form Robot's camera
+    // Image from Robot's camera
     Rectangle {
         id: imageCamera
         width: comboBoxImage.width
@@ -391,7 +456,7 @@ Rectangle {
         id: robotParameter
         width: comboBoxImage.width
         anchors.top: comboBoxImage.bottom
-        anchors.bottom: imageCamera.top
+        anchors.bottom: startNavigateButton.top
         anchors.topMargin: componentMargin
         anchors.bottomMargin: componentMargin
         anchors.left: comboBoxImage.left
@@ -436,7 +501,7 @@ Rectangle {
     // Map Rectangle
     Rectangle {
         id: mapImageRectangle
-        height: robotParameter.height * 1.15
+        height: robotParameter.height * 1.3
         anchors.top: robotParameter.top
         anchors.left: robotParameter.right
         anchors.right: parent.right
@@ -450,9 +515,9 @@ Rectangle {
         clip: true
 
         Connections {
-            target: rosBridgeClientQML
-            onTopicDataChanged: {
-                dashboard.robotPoseFunction();                   
+            target: viewModelQML
+            onRobotPoseChanged: {
+                dashboard.updateRobotPose();                   
             }
         }
 
@@ -467,16 +532,37 @@ Rectangle {
             layer.enabled: true
             layer.smooth: true
 
-            Image {
-                id: robotImage
-                source: "qrc:/images/robot.png"
-                height: dashboard.height * 0.03
-                width: height
+            // onStatusChanged: {
+            //     viewModelQML.onImageLoader(width, height, sourceSize.width, sourceSize.height);                   
+            // }
             
-                Component.onCompleted: robotPoseFunction()  // ✅ Chạy ngay khi khởi động
-
+            Rectangle {
+                id: robotImageContainer
+                width: dashboard.height * 0.03
+                height: width
+                rotation: -(robotPose.angular_yaw * (180 / Math.PI) - 90)
                 x: dashboard.robotX - width / 2
                 y: dashboard.robotY - height / 2
+                color: "transparent"
+             
+                Shape {
+                    id: robotIamge
+                    Component.onCompleted: updateRobotPose()
+                    ShapePath {
+                        fillColor: "#e74c3c"
+                        strokeColor: "#c0392b" // Màu viền sẫm hơn để nổi bật
+                        strokeWidth: 2
+                        capStyle: ShapePath.RoundCap // Làm tròn nét vẽ
+                        startX: robotImageContainer.width / 2
+                        startY: 0
+                        PathLine { x: robotImageContainer.width; y: robotImageContainer.height }
+                        PathLine { x: robotImageContainer.width * 0.75; y: robotImageContainer.height * 0.75 }
+                        PathLine { x: robotImageContainer.width / 2; y: robotImageContainer.height / 1.5 }
+                        PathLine { x: robotImageContainer.width * 0.25; y: robotImageContainer.height * 0.75 }
+                        PathLine { x: 0; y: robotImageContainer.height }
+                        PathLine { x: robotImageContainer.width / 2; y: 0 }
+                    }
+                }
             }
         }
 
@@ -544,7 +630,7 @@ Rectangle {
                     let [PixelX, PixelY] = [Math.round(xRatio * mapImage.sourceSize.width), Math.round(yRatio * mapImage.sourceSize.height)];
                     
                     metterX = (PixelX * mapResolution + mapOrigin[0]).toFixed(2);
-                    metterY = -(PixelY * mapResolution - (mapImage.sourceSize.height * mapResolution + mapOrigin[1])).toFixed(2) / 2;
+                    metterY = -(PixelY * mapResolution - (mapImage.sourceSize.height * mapResolution + mapOrigin[1])).toFixed(2);
 
                     pixelText.text = `Pixel: X = ${metterX}, Y = ${metterY}`;
 
@@ -573,7 +659,7 @@ Rectangle {
             onPaint: {
                 let ctx = getContext("2d");
                 ctx.clearRect(0, 0, width, height);
-                for (let i = 0; i < dashboard.clickedPoints.length; i++) {
+                for (let i = 1; i < dashboard.clickedPoints.length; i++) {
                     let point = dashboard.clickedPoints[i];
                     ctx.beginPath();
                     ctx.arc(point.x, point.y, 8, 0, 2 * Math.PI);
@@ -581,7 +667,8 @@ Rectangle {
                     ctx.fill();
                 }
 
-                let curvePoints = hermiteCurveQML.curvePointsQml;
+                let curvePoints = viewModelQML.waypointsQml;
+                // let curvePoints = hermiteCurveQML.curvePointsQml;
                 ctx.beginPath();
                 for (let i = 0; i < curvePoints.length; i++) {
                     let segment = curvePoints[i];
@@ -589,11 +676,11 @@ Rectangle {
                     let y = segment.y;
 
                     if (i === 0) {
-                        ctx.moveTo(x[0], y[0]);
+                        ctx.moveTo(x[0] + robotImageContainer.width / 2, y[0] - robotImageContainer.width / 2);
                     }
 
                     for (let j = 1; j < x.length; j++) {
-                        ctx.lineTo(x[j], y[j]);
+                        ctx.lineTo(x[j] + robotImageContainer.width / 2, y[j] - robotImageContainer.width / 2);
                     }
                 }
                 ctx.strokeStyle = "blue";
@@ -640,8 +727,6 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
 
         }
-
-        onClicked: Qt.quit()
     }
 
     // Switch Scenario
@@ -835,28 +920,3 @@ Rectangle {
         }
     }
 }
-
-
-// import QtQuick 2.12
-// import QtQuick.Controls 2.12
-
-// Rectangle {
-//     visible: true
-//     width: 400
-//     height: 300
-
-//     Column {
-//         anchors.centerIn: parent
-//         spacing: 10
-
-//         Text { text: "string_topic_1: " + (rosBridgeClientQML.topicData["/string1"] || "No data") }
-//         Text { text: "string_topic_2: " + (rosBridgeClientQML.topicData["/string2"] || "No data") }
-//         Text {
-//             text: "pose_1:\n" +
-//                   "  Pos X: " + (rosBridgeClientQML.topicData["/amcl_pose"].position_x || 0) + "\n" +
-//                   "  Pos Y: " + (rosBridgeClientQML.topicData["/amcl_pose"].position_y || 0) + "\n" +
-//                   "  Pos Z: " + (rosBridgeClientQML.topicData["/amcl_pose"].position_z || 0) + "\n" +
-//                   "  Pos W: " + (rosBridgeClientQML.topicData["/amcl_pose"].position_w || 0) + "\n"
-//         }
-//     }
-// }

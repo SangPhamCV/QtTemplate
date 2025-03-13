@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/sang/workspace/qt/template/build/include/websocket/moc_publishclient.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o"
   "/home/sang/workspace/qt/template/build/include/websocket/moc_stringsubscribeclient.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o"
   "/home/sang/workspace/qt/template/build/include/websocket/moc_subscribeclient.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o"
+  "/home/sang/workspace/qt/template/build/include/websocket/moc_viewmodel.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o"
   "/home/sang/workspace/qt/template/build/qrc_resources.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.o"
   "/home/sang/workspace/qt/template/src/hermitecurve.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/src/hermitecurve.cpp.o"
   "/home/sang/workspace/qt/template/src/loginhandler.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/src/loginhandler.cpp.o"
@@ -22,6 +23,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/sang/workspace/qt/template/src/websocket/publishclient.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o"
   "/home/sang/workspace/qt/template/src/websocket/stringsubscribeclient.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o"
   "/home/sang/workspace/qt/template/src/websocket/subscribeclient.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o"
+  "/home/sang/workspace/qt/template/src/websocket/viewmodel.cpp" "/home/sang/workspace/qt/template/build/CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

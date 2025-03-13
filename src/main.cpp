@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "hermitecurve.h"
 #include "rosbridgeclient.h"
+#include "websocket/viewmodel.h"
 #include <iostream>
 
 int main(int argc, char *argv[]) {
@@ -13,21 +14,23 @@ int main(int argc, char *argv[]) {
 
     LoginHandler loginHandler;
     MainWindow mainWindow;
+    ViewModel viewModel(&mainWindow);
     HermiteCurve hermiteCurve;
     FileListModel fileListModel;
-    RosBridgeClient* rosClient = new RosBridgeClient();
+    // RosBridgeClient* rosClient = new RosBridgeClient();
 
     // qmlRegisterType<LoginHandler>("myapp.loginhandler", 1, 0, "LoginHandler");
 
-    rosClient->addStringClient("/string1");
-    rosClient->addStringClient("/string2");
-    rosClient->addPoseClient("/amcl_pose");
+    // rosClient->addStringClient("/string1");
+    // rosClient->addStringClient("/string2");
+    // rosClient->addPoseClient("/amcl_pose");
 
     engine.rootContext()->setContextProperty("loginHandlerQML", &loginHandler);
     engine.rootContext()->setContextProperty("mainWindowQML", &mainWindow);
     engine.rootContext()->setContextProperty("hermiteCurveQML", &hermiteCurve);
     engine.rootContext()->setContextProperty("fileListModelQML", &fileListModel);
-    engine.rootContext()->setContextProperty("rosBridgeClientQML", rosClient);    
+    // engine.rootContext()->setContextProperty("rosBridgeClientQML", rosClient);    
+    engine.rootContext()->setContextProperty("viewModelQML", &viewModel);
 
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

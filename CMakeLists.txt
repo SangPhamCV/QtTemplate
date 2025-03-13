@@ -11,35 +11,9 @@ find_package(Qt5 COMPONENTS Quick WebSockets REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
 # Thêm tất cả các tệp .cpp và .h vào danh sách SOURCES và HEADERS
-set(SOURCES
-    src/main.cpp
-    src/loginhandler.cpp
-    src/mainwindow.cpp
-    src/hermitecurve.cpp
-    src/rosbridgeclient.cpp
-    src/websocket/subscribeclient.cpp
-    src/websocket/publishclient.cpp
-    src/websocket/stringsubscribeclient.cpp
-    src/websocket/posesubscribeclient.cpp
-)
-
-set(HEADERS
-    include/loginhandler.h
-    include/mainwindow.h
-    include/hermitecurve.h
-    include/rosbridgeclient.h
-    include/websocket/subscribeclient.h
-    include/websocket/publishclient.h
-    include/websocket/stringsubscribeclient.h
-    include/websocket/posesubscribeclient.h
-)
-
-# Thêm tất cả các tệp .qml vào tài nguyên
-set(QML_FILES
-    qml/Main.qml
-    qml/Login.qml
-    qml/Dashboard.qml
-)
+file(GLOB_RECURSE SOURCES src/*.cpp)
+file(GLOB_RECURSE HEADERS include/*.h)
+file(GLOB_RECURSE QML_FILES qml/*.qml)
 
 # Generate MOC files for headers with Q_OBJECT
 qt5_wrap_cpp(MOC_SOURCES ${HEADERS})
@@ -54,6 +28,7 @@ add_executable(MyQmlProject
     ${SOURCES}
     ${MOC_SOURCES}  # Thêm MOC files vào
     ${RESOURCE_FILES}
+    src/websocket/viewmodel.cpp
 )
 
 # Liên kết thư viện Qt với ứng dụng

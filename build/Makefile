@@ -339,6 +339,33 @@ include/websocket/moc_subscribeclient.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s
 .PHONY : include/websocket/moc_subscribeclient.cpp.s
 
+include/websocket/moc_viewmodel.o: include/websocket/moc_viewmodel.cpp.o
+
+.PHONY : include/websocket/moc_viewmodel.o
+
+# target to build an object file
+include/websocket/moc_viewmodel.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o
+.PHONY : include/websocket/moc_viewmodel.cpp.o
+
+include/websocket/moc_viewmodel.i: include/websocket/moc_viewmodel.cpp.i
+
+.PHONY : include/websocket/moc_viewmodel.i
+
+# target to preprocess a source file
+include/websocket/moc_viewmodel.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.i
+.PHONY : include/websocket/moc_viewmodel.cpp.i
+
+include/websocket/moc_viewmodel.s: include/websocket/moc_viewmodel.cpp.s
+
+.PHONY : include/websocket/moc_viewmodel.s
+
+# target to generate assembly for a file
+include/websocket/moc_viewmodel.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.s
+.PHONY : include/websocket/moc_viewmodel.cpp.s
+
 qrc_resources.o: qrc_resources.cpp.o
 
 .PHONY : qrc_resources.o
@@ -609,6 +636,33 @@ src/websocket/subscribeclient.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s
 .PHONY : src/websocket/subscribeclient.cpp.s
 
+src/websocket/viewmodel.o: src/websocket/viewmodel.cpp.o
+
+.PHONY : src/websocket/viewmodel.o
+
+# target to build an object file
+src/websocket/viewmodel.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o
+.PHONY : src/websocket/viewmodel.cpp.o
+
+src/websocket/viewmodel.i: src/websocket/viewmodel.cpp.i
+
+.PHONY : src/websocket/viewmodel.i
+
+# target to preprocess a source file
+src/websocket/viewmodel.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.i
+.PHONY : src/websocket/viewmodel.cpp.i
+
+src/websocket/viewmodel.s: src/websocket/viewmodel.cpp.s
+
+.PHONY : src/websocket/viewmodel.s
+
+# target to generate assembly for a file
+src/websocket/viewmodel.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.s
+.PHONY : src/websocket/viewmodel.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -642,6 +696,9 @@ help:
 	@echo "... include/websocket/moc_subscribeclient.o"
 	@echo "... include/websocket/moc_subscribeclient.i"
 	@echo "... include/websocket/moc_subscribeclient.s"
+	@echo "... include/websocket/moc_viewmodel.o"
+	@echo "... include/websocket/moc_viewmodel.i"
+	@echo "... include/websocket/moc_viewmodel.s"
 	@echo "... qrc_resources.o"
 	@echo "... qrc_resources.i"
 	@echo "... qrc_resources.s"
@@ -672,6 +729,9 @@ help:
 	@echo "... src/websocket/subscribeclient.o"
 	@echo "... src/websocket/subscribeclient.i"
 	@echo "... src/websocket/subscribeclient.s"
+	@echo "... src/websocket/viewmodel.o"
+	@echo "... src/websocket/viewmodel.i"
+	@echo "... src/websocket/viewmodel.s"
 .PHONY : help
 
 
