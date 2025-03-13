@@ -302,59 +302,73 @@ Rectangle {
         border.width: 2
         border.color: "#BDBDBD"
         color: "#FFFFFF"
-
-        Column {
-            spacing: 10
+    
+        Text {
+            text: "TELEOP JOYSTICK"
+            color: "#37474F"
+            font.pixelSize: teleopJoystick.height * 0.05
+            font.bold: true
+            anchors.top: parent.top
+            anchors.topMargin: componentMargin
             anchors.horizontalCenter: parent.horizontalCenter
-            // Text { text: "string_topic_1: " + (rosBridgeClientQML.topicData["/string1"] || "No data") }
-            // Text { text: "string_topic_2: " + (rosBridgeClientQML.topicData["/string2"] || "No data") }
-            Text {
-                text: "TELEOP JOYSTICK"
-                color: "#37474F"
-                font.pixelSize: teleopJoystick.height * 0.05
-                font.bold: true
-                anchors.topMargin: componentMargin
-            }
-
-            Text {
-                text: "Pos X: " + (robotPose.position_x).toFixed(2) + 
-                    "\nPos Y: " + (robotPose.position_y).toFixed(2) +
-                    "\nPos Angular: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2)                 
-            }
         }
-
-        Rectangle {
-            id: joystickPad
-            width: parent.width * 0.6
-            height: width
-            radius: width / 2
-            color: "#E0E0E0"
+        
+        Column {
             anchors.centerIn: parent
+            spacing: 10
+
             Rectangle {
-                id: joystickHandle
-                width: parent.width * 0.3
+                id: joystickPad
+                width: teleopJoystick.width * 0.6
                 height: width
                 radius: width / 2
-                color: "#1976D2"
-                anchors.centerIn: parent
-                MouseArea {
-                    anchors.fill: parent
-                    drag.target: joystickHandle
-                    drag.axis: Drag.XAndYAxis
-                    drag.minimumX: -parent.width * 0.35
-                    drag.maximumX: parent.width * 0.35
-                    drag.minimumY: -parent.width * 0.35
-                    drag.maximumY: parent.width * 0.35
-                    onReleased: {
-                        joystickHandle.x = 0;
-                        joystickHandle.y = 0;
-                    }
-                    onPositionChanged: {
-                        let speedX = joystickHandle.x / (parent.width * 0.35);
-                        let speedY = -joystickHandle.y / (parent.width * 0.35);
-                        // console.log("Speed: X =", speedX.toFixed(2), "Y =", speedY.toFixed(2));
+                color: "#E0E0E0"
+                anchors.centerIn: teleopJoystick
+
+                Rectangle {
+                    id: joystickHandle
+                    width: parent.width * 0.3
+                    height: width
+                    radius: width / 2
+                    color: "#1976D2"
+                    anchors.centerIn: parent
+                    MouseArea {
+                        anchors.fill: parent
+                        drag.target: joystickHandle
+                        drag.axis: Drag.XAndYAxis
+                        drag.minimumX: -parent.width * 0.35
+                        drag.maximumX: parent.width * 0.35
+                        drag.minimumY: -parent.width * 0.35
+                        drag.maximumY: parent.width * 0.35
+                        onReleased: {
+                            joystickHandle.x = 0;
+                            joystickHandle.y = 0;
+                        }
+                        onPositionChanged: {
+                            let speedX = joystickHandle.x / (parent.width * 0.35);
+                            let speedY = -joystickHandle.y / (parent.width * 0.35);
+                            // console.log("Speed: X =", speedX.toFixed(2), "Y =", speedY.toFixed(2));
+                        }
                     }
                 }
+            }
+
+            Text { text: "Linear Speed: " + linearSpeedSlider.value.toFixed(2) }
+            Slider {
+                id: linearSpeedSlider
+                width: robotParameter.width * 0.8
+                from: 0
+                to: 2.0
+                value: 1.0
+            }
+
+            Text { text: "Angular Speed: " + angularSpeedSlider.value.toFixed(2) }
+            Slider {
+                id: angularSpeedSlider
+                width: robotParameter.width * 0.8
+                from: 0
+                to: 3.0
+                value: 1.5
             }
         }
     }
@@ -469,31 +483,32 @@ Rectangle {
         Text {
             text: "ROBOT SPEED"
             color: "#37474F"
-            font.pixelSize: parent.height * 0.05
+            font.pixelSize: teleopJoystick.height * 0.05
             font.bold: true
-            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 10
+            anchors.topMargin: componentMargin
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Column {
-            anchors.centerIn: parent
+            anchors.top: parent.top
+            anchors.topMargin: componentMargin
             spacing: 20
-            Text { text: "Linear Speed: " + linearSpeedSlider.value.toFixed(2) }
-            Slider {
-                id: linearSpeedSlider
-                width: robotParameter.width * 0.8
-                from: 0
-                to: 2.0
-                value: 1.0
+
+            // Text { text: "string_topic_1: " + (rosBridgeClientQML.topicData["/string1"] || "No data") }
+            // Text { text: "string_topic_2: " + (rosBridgeClientQML.topicData["/string2"] || "No data") }
+            Text {
+                text: "Robot Position:" +
+                    "\n\tPos X: " + (robotPose.position_x).toFixed(2) + 
+                    "\n\tPos Y: " + (robotPose.position_y).toFixed(2) +
+                    "\n\tPos Angular: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2)                 
             }
-            Text { text: "Angular Speed: " + angularSpeedSlider.value.toFixed(2) }
-            Slider {
-                id: angularSpeedSlider
-                width: robotParameter.width * 0.8
-                from: 0
-                to: 3.0
-                value: 1.5
+
+                        Text {
+                text: "Robot Position:" +
+                    "\n\tPos X: " + (robotPose.position_x).toFixed(2) + 
+                    "\n\tPos Y: " + (robotPose.position_y).toFixed(2) +
+                    "\n\tPos Angular: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2)                 
             }
         }
     }
@@ -725,7 +740,6 @@ Rectangle {
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-
         }
     }
 

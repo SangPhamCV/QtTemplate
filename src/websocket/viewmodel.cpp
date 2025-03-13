@@ -110,8 +110,6 @@ void ViewModel::updateRosData(const QString &topic, const QJsonObject &msg) {
             }
         }
 
-        qDebug() << xList[0] << yList[0];
-
         QVariantMap segmentWaypoints;
         // segmentWaypoints.insert("x", xList);
         // segmentWaypoints.insert("y", yList);
@@ -133,7 +131,6 @@ void ViewModel::updateRosData(const QString &topic, const QJsonObject &msg) {
 
         mWaypoints.append(segmentWaypoints);
         emit waypointsChanged();
-        qDebug() << mWaypoints.size();
     }
     // } else if (topic == "/laser_scan") {
     //     m_laserScan.clear();
