@@ -57,13 +57,13 @@ RosBridgeClient::RosBridgeClient(QObject *parent) : QObject(parent) {
     connect(&mWebSocket, &QWebSocket::textMessageReceived, this, &RosBridgeClient::onMessageReceived);
 
     // Khai báo các topic và kiểu dữ liệu
-    mTopics["/cmd_vel"] = "geometry_msgs/Twist";
+    mTopics["/armbot/mobile_base_controller/cmd_vel"] = "geometry_msgs/Twist";
     mTopics["/amcl_pose"] = "geometry_msgs/PoseWithCovarianceStamped";
     mTopics["/battery_status"] = "std_msgs/Float32";
     mTopics["/laser_scan"] = "sensor_msgs/LaserScan";
     mTopics["/goal_position"] = "std_msgs/Float32MultiArray";
     mTopics["/move_command"] = "std_msgs/String";
-    mTopics["/waypoints"] = "geometry_msgs/PoseArray";
+    mTopics["/waypointss"] = "std_msgs/String";
 }
 
 void RosBridgeClient::connectToRos() {

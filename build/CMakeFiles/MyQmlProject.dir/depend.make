@@ -717,6 +717,8 @@ CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QDir
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFlags
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonArray
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonDocument
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonObject
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
@@ -726,6 +728,7 @@ CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariantList
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariantMap
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QtMath
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qabstractitemmodel.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qarraydata.h
@@ -758,12 +761,15 @@ CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qhashfunctions.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiterator.h
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonarray.h
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsondocument.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonobject.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonvalue.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlist.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlogging.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h
+CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmath.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmetatype.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmutex.h
 CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qnamespace.h
@@ -957,6 +963,8 @@ CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/Qt
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QDir
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFlags
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonArray
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonDocument
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonObject
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
@@ -966,6 +974,7 @@ CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/Qt
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariantList
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariantMap
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QtMath
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qabstractitemmodel.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qarraydata.h
@@ -1000,12 +1009,15 @@ CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/Qt
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qhashfunctions.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiterator.h
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonarray.h
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsondocument.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonobject.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonvalue.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlist.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlogging.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h
+CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmath.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmetaobject.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmetatype.h
 CMakeFiles/MyQmlProject.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmutex.h
@@ -1700,6 +1712,7 @@ CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-l
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFlags
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonArray
+CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonDocument
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QJsonObject
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
@@ -1743,6 +1756,7 @@ CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-l
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiterator.h
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonarray.h
+CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsondocument.h
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonobject.h
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qjsonvalue.h
 CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlist.h

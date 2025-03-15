@@ -6,6 +6,11 @@
 #include <QVariantList>
 #include <iostream>
 #include <array>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QtMath>
+#include <QDebug>
 #include "rosbridgeclient.h"
 #include "mainwindow.h"
 

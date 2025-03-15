@@ -2,7 +2,8 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Shapes 1.12
 import QtQuick.Window 2.12
-
+import QtQuick.Layouts 1.12
+ 
 Rectangle {
     id: dashboard
     anchors.centerIn: parent 
@@ -25,6 +26,9 @@ Rectangle {
     property var mapOrigin: []
     // property var robotPose: rosBridgeClientQML.topicData["/amcl_pose"]
     property var robotPose: viewModelQML.robotPose
+
+    property var linearSpeed: 0
+    property var angularSpeed: 0
 
     property real robotX: 0
     property real robotY: 0
@@ -288,7 +292,6 @@ Rectangle {
         }        
     }
 
-
     // Teleop Joystick
     Rectangle {
         id: teleopJoystick
@@ -302,8 +305,11 @@ Rectangle {
         border.width: 2
         border.color: "#BDBDBD"
         color: "#FFFFFF"
-    
+        Component.onCompleted: {
+            viewModelQML.sendVelocityCommand(0, 0);
+        }
         Text {
+            id: teleopJoystickText
             text: "TELEOP JOYSTICK"
             color: "#37474F"
             font.pixelSize: teleopJoystick.height * 0.05
@@ -312,65 +318,264 @@ Rectangle {
             anchors.topMargin: componentMargin
             anchors.horizontalCenter: parent.horizontalCenter
         }
-        
-        Column {
-            anchors.centerIn: parent
-            spacing: 10
+
+        // Joystick
+        Item {
+            id: joystickArea
+            width: parent.width * 0.7
+            height: width
+            anchors.top: teleopJoystickText.bottom
+            anchors.topMargin: componentMargin
+            anchors.horizontalCenter: parent.horizontalCenter
 
             Rectangle {
-                id: joystickPad
-                width: teleopJoystick.width * 0.6
+                id: outerCircle
+                width: parent.width
                 height: width
                 radius: width / 2
                 color: "#E0E0E0"
-                anchors.centerIn: teleopJoystick
+                border.color: "#B0BEC5"
+                border.width: 2
+            }
 
-                Rectangle {
-                    id: joystickHandle
-                    width: parent.width * 0.3
-                    height: width
-                    radius: width / 2
-                    color: "#1976D2"
-                    anchors.centerIn: parent
-                    MouseArea {
-                        anchors.fill: parent
-                        drag.target: joystickHandle
-                        drag.axis: Drag.XAndYAxis
-                        drag.minimumX: -parent.width * 0.35
-                        drag.maximumX: parent.width * 0.35
-                        drag.minimumY: -parent.width * 0.35
-                        drag.maximumY: parent.width * 0.35
-                        onReleased: {
-                            joystickHandle.x = 0;
-                            joystickHandle.y = 0;
+            Rectangle {
+                id: innerCircle
+                width: outerCircle.width * 0.3
+                height: width
+                radius: width / 2
+                color: "#2196F3"
+                border.color: "#1976D2"
+                border.width: 2
+                x: (outerCircle.width - width) / 2
+                y: (outerCircle.height - height) / 2
+
+                property bool dragging: false
+                property var startPosition: Qt.point(0, 0)
+            }
+
+            MouseArea {
+                id: joystickMouseArea
+                anchors.fill: outerCircle
+                onPressed: {
+                    innerCircle.dragging = true
+                    // Cập nhật vị trí ban đầu khi bắt đầu kéo
+                    innerCircle.startPosition = Qt.point(innerCircle.x, innerCircle.y)
+                }
+                
+                onPositionChanged: {
+                    if (innerCircle.dragging) {
+                        var centerX = outerCircle.width / 2
+                        var centerY = outerCircle.height / 2
+                        var dx = mouseX - centerX
+                        var dy = mouseY - centerY
+                        var distance = Math.sqrt(dx * dx + dy * dy)
+                        var maxDistance = (outerCircle.width - innerCircle.width) / 2
+
+                        if (distance > maxDistance) {
+                            var angle = Math.atan2(dy, dx)
+                            innerCircle.x = centerX + Math.cos(angle) * maxDistance - innerCircle.width / 2
+                            innerCircle.y = centerY + Math.sin(angle) * maxDistance - innerCircle.height / 2
+                        } else {
+                            innerCircle.x = mouseX - innerCircle.width / 2
+                            innerCircle.y = mouseY - innerCircle.height / 2
                         }
-                        onPositionChanged: {
-                            let speedX = joystickHandle.x / (parent.width * 0.35);
-                            let speedY = -joystickHandle.y / (parent.width * 0.35);
-                            // console.log("Speed: X =", speedX.toFixed(2), "Y =", speedY.toFixed(2));
-                        }
+
+                        var innerCenterY = innerCircle.y + innerCircle.height / 2
+                        var heightValue = (innerCenterY < centerY) ? 1 : -1
+
+                        var innerCenterX = innerCircle.x + innerCircle.width / 2
+                        var widthValue = (innerCenterX < centerX) ? 2 : -2
+
+                        dashboard.linearSpeed = linearSpeedSlider.value * (1 - innerCircle.y / (outerCircle.height / 2 - innerCircle.height / 2));
+                        dashboard.angularSpeed = angularSpeedSlider.value * (1 - innerCircle.x / (outerCircle.width / 2 - innerCircle.width / 2));
+                        viewModelQML.sendVelocityCommand(dashboard.linearSpeed, dashboard.angularSpeed);
                     }
                 }
-            }
 
-            Text { text: "Linear Speed: " + linearSpeedSlider.value.toFixed(2) }
-            Slider {
-                id: linearSpeedSlider
-                width: robotParameter.width * 0.8
-                from: 0
-                to: 2.0
-                value: 1.0
-            }
-
-            Text { text: "Angular Speed: " + angularSpeedSlider.value.toFixed(2) }
-            Slider {
-                id: angularSpeedSlider
-                width: robotParameter.width * 0.8
-                from: 0
-                to: 3.0
-                value: 1.5
+                onReleased: {
+                    innerCircle.dragging = false
+                    // Quay về vị trí trung tâm khi thả
+                    innerCircle.x = (outerCircle.width - innerCircle.width) / 2
+                    innerCircle.y = (outerCircle.height - innerCircle.height) / 2
+                    dashboard.linearSpeed = 0;
+                    dashboard.angularSpeed = 0;
+                    viewModelQML.sendVelocityCommand(dashboard.linearSpeed, dashboard.angularSpeed);
+                }
             }
         }
+
+        // Linear Speed Slider
+        Row {
+            id: linearSpeedRow
+            anchors.top: joystickArea.bottom
+            anchors.topMargin: componentMargin * 1.5
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 10
+
+            Text {
+                text: "Linear Speed:"
+                font.pixelSize: 14
+                color: "#212121"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Slider {
+                id: linearSpeedSlider
+                from: 0
+                to: 2
+                value: 0.4
+                width: 150
+                height: 30
+                onValueChanged: linearSpeedValue.text = value.toFixed(2)
+            }
+
+            Text {
+                id: linearSpeedValue
+                text: linearSpeedSlider.value.toFixed(2)
+                font.pixelSize: 14
+                color: "#212121"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        // Angular Speed Slider
+        
+        Row {
+            id: angularSpeedRow
+            anchors.top: linearSpeedRow.bottom
+            anchors.topMargin: componentMargin * 0.75
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 10
+
+            Text {
+                text: "Angular Speed:"
+                font.pixelSize: 14
+                color: "#212121"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Slider {
+                id: angularSpeedSlider
+                from: 0
+                to: 3
+                value: 0.6
+                width: 150
+                height: 30
+                onValueChanged: angularSpeedValue.text = value.toFixed(2)
+            }
+
+            Text {
+                id: angularSpeedValue
+                text: angularSpeedSlider.value.toFixed(2)
+                font.pixelSize: 14
+                color: "#212121"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+    }
+
+    // Robot Parameter
+    Rectangle {
+        id: robotParameter
+        width: comboBoxImage.width
+        anchors.top: comboBoxImage.bottom
+        anchors.bottom: startNavigateButton.top
+        anchors.topMargin: componentMargin
+        anchors.bottomMargin: componentMargin
+        anchors.left: comboBoxImage.left
+
+        radius: 12
+        border.width: 2
+        border.color: "#BDBDBD"
+        color: "#FFFFFF"
+
+        Text {
+            id: robotSpeedTitle
+            text: "ROBOT SPEED"
+            color: "#37474F"
+            font.pixelSize: teleopJoystick.height * 0.05
+            font.bold: true
+            anchors.top: parent.top
+            anchors.topMargin: componentMargin
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Text {
+            id: robotPositionText
+            text: "Current Position:"
+            font.pixelSize: robotSpeedTitle.font.pixelSize
+            font.bold: true
+            color: "#212121"
+            anchors.top: robotSpeedTitle.bottom
+            anchors.left: parent.left
+            anchors.topMargin: componentMargin * 2
+            anchors.leftMargin: componentMargin
+            horizontalAlignment: Text.AlignLeft            
+        }
+
+        Column {
+            id: positionColumn
+            anchors.top: robotPositionText.bottom
+            anchors.left: parent.left
+            anchors.topMargin: componentMargin * 0.5
+            anchors.leftMargin: componentMargin * 1.5
+            spacing: 5
+
+            Text { text: " - Pos X: " + (robotPose.position_x); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+            Text { text: " - Pos Y: " + (robotPose.position_y); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+            Text { text: " - Angular: " + (robotPose.angular_yaw); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+        }
+
+        Text {
+            id: movementStatusText
+            text: "Movement Status:"
+            font.pixelSize: robotSpeedTitle.font.pixelSize
+            font.bold: true
+            color: "#212121"
+            anchors.top: positionColumn.bottom
+            anchors.left: parent.left
+            anchors.topMargin: componentMargin
+            anchors.leftMargin: componentMargin
+            horizontalAlignment: Text.AlignLeft            
+        }
+
+        Column {
+            id: movementColumn
+            anchors.top: movementStatusText.bottom
+            anchors.left: parent.left
+            anchors.topMargin: componentMargin * 0.5
+            anchors.leftMargin: componentMargin * 1.5
+            spacing: 5
+
+            Text { text: " - Estimate Distance: " + (robotPose.position_x).toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+            Text { text: " - Remaining Distance: " + (robotPose.position_y).toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+            Text { text: " - Remaining Time: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+        }
+
+        Text {
+            id: velocityText
+            text: "Robot Velocity:"
+            font.pixelSize: robotSpeedTitle.font.pixelSize
+            font.bold: true
+            color: "#212121"
+            anchors.top: movementColumn.bottom
+            anchors.left: parent.left
+            anchors.topMargin: componentMargin
+            anchors.leftMargin: componentMargin
+            horizontalAlignment: Text.AlignLeft            
+        }
+
+        Column {
+            id: velocityColumn
+            anchors.top: velocityText.bottom
+            anchors.left: parent.left
+            anchors.topMargin: componentMargin * 0.5
+            anchors.leftMargin: componentMargin * 1.5
+            spacing: 5
+
+            Text { text: " - Linear velocity: " + dashboard.linearSpeed.toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+            Text { text: " - Angular velocity: " + dashboard.angularSpeed.toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
+        }        
     }
 
     // Destination
@@ -464,55 +669,6 @@ Rectangle {
         }
     }
 
-
-    // Robot Speed Parameter
-    Rectangle {
-        id: robotParameter
-        width: comboBoxImage.width
-        anchors.top: comboBoxImage.bottom
-        anchors.bottom: startNavigateButton.top
-        anchors.topMargin: componentMargin
-        anchors.bottomMargin: componentMargin
-        anchors.left: comboBoxImage.left
-
-        radius: 12
-        border.width: 2
-        border.color: "#BDBDBD"
-        color: "#FFFFFF"
-
-        Text {
-            text: "ROBOT SPEED"
-            color: "#37474F"
-            font.pixelSize: teleopJoystick.height * 0.05
-            font.bold: true
-            anchors.top: parent.top
-            anchors.topMargin: componentMargin
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Column {
-            anchors.top: parent.top
-            anchors.topMargin: componentMargin
-            spacing: 20
-
-            // Text { text: "string_topic_1: " + (rosBridgeClientQML.topicData["/string1"] || "No data") }
-            // Text { text: "string_topic_2: " + (rosBridgeClientQML.topicData["/string2"] || "No data") }
-            Text {
-                text: "Robot Position:" +
-                    "\n\tPos X: " + (robotPose.position_x).toFixed(2) + 
-                    "\n\tPos Y: " + (robotPose.position_y).toFixed(2) +
-                    "\n\tPos Angular: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2)                 
-            }
-
-                        Text {
-                text: "Robot Position:" +
-                    "\n\tPos X: " + (robotPose.position_x).toFixed(2) + 
-                    "\n\tPos Y: " + (robotPose.position_y).toFixed(2) +
-                    "\n\tPos Angular: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2)                 
-            }
-        }
-    }
-
     // Map Rectangle
     Rectangle {
         id: mapImageRectangle
@@ -546,16 +702,12 @@ Rectangle {
             visible: !!mapImage.source
             layer.enabled: true
             layer.smooth: true
-
-            // onStatusChanged: {
-            //     viewModelQML.onImageLoader(width, height, sourceSize.width, sourceSize.height);                   
-            // }
             
             Rectangle {
                 id: robotImageContainer
                 width: dashboard.height * 0.03
                 height: width
-                rotation: -(robotPose.angular_yaw * (180 / Math.PI) - 90)
+                rotation: -(robotPose.angular_yaw - 90)
                 x: dashboard.robotX - width / 2
                 y: dashboard.robotY - height / 2
                 color: "transparent"
@@ -691,11 +843,11 @@ Rectangle {
                     let y = segment.y;
 
                     if (i === 0) {
-                        ctx.moveTo(x[0] + robotImageContainer.width / 2, y[0] - robotImageContainer.width / 2);
+                        ctx.moveTo(x[0] + robotImageContainer.width * 0.75, y[0] - robotImageContainer.width * 0.75);
                     }
 
                     for (let j = 1; j < x.length; j++) {
-                        ctx.lineTo(x[j] + robotImageContainer.width / 2, y[j] - robotImageContainer.width / 2);
+                        ctx.lineTo(x[j] + robotImageContainer.width * 0.75, y[j] - robotImageContainer.width * 0.75);
                     }
                 }
                 ctx.strokeStyle = "blue";
@@ -740,6 +892,10 @@ Rectangle {
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+        }
+
+        onClicked: {
+            viewModelQML.sendVelocityCommand(0.0, 0.5)
         }
     }
 
