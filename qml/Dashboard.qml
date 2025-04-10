@@ -1,80 +1,49 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Shapes 1.12
-import QtQuick.Window 2.12
-import QtQuick.Layouts 1.12
+import QtWebEngine 1.7
+import QtGraphicalEffects 1.12
  
 Rectangle {
-    id: dashboard
-    anchors.centerIn: parent 
-    color: "#F5F5F5" 
-
     signal logOutRequested()
 
-    property var fileNames: []
-    property var clickedPoints: []
-    property var selectedPointIndex: -1
-
-    property bool isCreatingPoint: true
-    property bool isMovingPoint: false
-    property bool isClearingLandmarkPoint: false
+    id: dashboard
+    anchors.centerIn: parent 
+    color: "#F5F5F5"
 
     property var parentMargin: parent.height * 0.01
     property var componentMargin: parent.height * 0.015
 
-    property var mapResolution: None
-    property var mapOrigin: []
-    // property var robotPose: rosBridgeClientQML.topicData["/amcl_pose"]
-    property var robotPose: viewModelQML.robotPose
+    property var selectedPointIndex: -1
 
-    property var linearSpeed: 0
-    property var angularSpeed: 0
+    property bool isCreateLandmark: true
+    property bool isClearingLandmark: false
+    property bool isNavigationMode: true
+    property bool isVirtualWallMode: false
 
-    property real robotX: 0
-    property real robotY: 0
-
-    function updateRobotPose() {
-        if (!mapOrigin || !mapResolution || !robotPose) return;
-
-        let newX = (robotPose.position_x - mapOrigin[0]) / mapResolution;
-        let newY = (robotPose.position_y - mapOrigin[1]) / mapResolution;
-
-        let newXX = newX * (mapImage.width / mapImage.sourceSize.width);
-        let newYY = mapImage.height - (newY * (mapImage.height / mapImage.sourceSize.height));
-
-        robotX = newXX;
-        robotY = newYY;
-
-        if (dashboard.clickedPoints.length === 0) {
-            hermiteCurveQML.addPoint(newXX, newYY);
-            dashboard.clickedPoints[0] = {x: newXX, y: newYY};
-        } else {
-            hermiteCurveQML.updatePoint(0, newXX, newYY);
-            dashboard.clickedPoints[0] = {x: newXX, y: newYY};
-        }
-    }
+    property var robotPoseMeter: rosHandlingQML.robotPoseMeterQml
+    property var robotPosePixel: []
 
     // Title Bar
-    Rectangle {
-        id: titleBar
+    Label {
+        id: titleBarLabel
         height: parent.height * 0.05
         width: parent.width * 0.3
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: parentMargin  // Giả sử parentMargin đã định nghĩa
+        anchors.topMargin: parentMargin
 
-        radius: 12
-        color: "#1976D2"
+        text: "ROBOT MANAGEMENT SYSTEM"
+        color: "#37474F"
+        font.bold: true
+        font.pixelSize: titleBarLabel.height * 0.6
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        padding: componentMargin
 
-        Text {
-            text: "ROBOT MANAGEMENT SYSTEM"
-            color: "white"
-            fontSizeMode: Text.Fit
-
-            font.bold: true
-            anchors.centerIn: parent
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.WordWrap
+        background: Rectangle {
+            color: "#1976D2"
+            radius: 12
         }
     }
 
@@ -82,25 +51,24 @@ Rectangle {
     ComboBox {
         id: comboBoxImage
         width: parent.width * 0.13
-        height: titleBar.height
-        model: fileListModelQML
+        height: titleBarLabel.height
+        model: fileHandlerQML
         textRole: "fileName"
 
-        anchors.top: titleBar.top
-        anchors.right: titleBar.left
+        anchors.top: titleBarLabel.top
+        anchors.right: titleBarLabel.left
         anchors.rightMargin: componentMargin
 
         background: Rectangle {
-            color: "#4CAF50"  // Màu nền xanh lá cây nhạt
-            border.color: "#388E3C"  // Viền xanh lá cây đậm
+            color: "#4CAF50"
+            border.color: "#388E3C"
             radius: 12
             border.width: 2
-        }   
+        }
 
         contentItem: Text {
             text: comboBoxImage.currentText
             color: "white"
-            // font.pixelSize: parent.height * 0.5
             fontSizeMode: Text.Fit
             font.bold: true
             horizontalAlignment: Text.AlignLeft
@@ -140,7 +108,6 @@ Rectangle {
             width: comboBoxImage.width
             contentItem: Text {
                 text: modelData
-                // font.pixelSize: comboBoxImage.height * 0.3
                 fontSizeMode: Text.Fit
                 color: comboBoxImage.highlightedIndex === index ? "white" : "black"
             }
@@ -156,28 +123,23 @@ Rectangle {
         
         function updateImage() {
             var yamlFilePath = ":/maps/" + comboBoxImage.currentText + ".yaml"
-            mainWindowQML.readYAML(yamlFilePath)
-            mapImage.source = Qt.resolvedUrl("../maps/" + mainWindowQML.getYamlValue().image)
-            mapResolution = mainWindowQML.getYamlValue().resolution
-            mapOrigin = mainWindowQML.getYamlValue().origin
+            readYamlQML.readYaml(yamlFilePath)
+            mapImage.source = Qt.resolvedUrl("../maps/" + readYamlQML.getYamlValue().image)
 
-            dashboard.clickedPoints = [];
-            hermiteCurveQML.clearLamdmarkPoints();
-            updateRobotPose();
-
-            hermiteCurveQML.createCurve();
+            hermiteCurveQML.clearLandmarkPoints(-1);
+            readYamlQML.onImageLoader(mapImage.width, mapImage.height, mapImage.sourceSize.width, mapImage.sourceSize.height, robotImageContainer.width, robotImageContainer.height);                   
+            hermiteCurveQML.addPoint(robotPoseMeter[0], robotPoseMeter[1]);
+            dashboard.robotPosePixel = rosHandlingQML.getRobotPosePixel(robotPoseMeter[0], robotPoseMeter[1]);
+        
             canvasMapImage.requestPaint();
-
-            viewModelQML.onImageLoader(mapImage.width, mapImage.height, mapImage.sourceSize.width, mapImage.sourceSize.height);                   
-
         }
     }
 
     // Connection status
     Rectangle {
         id: connectionStatus
-        height: titleBar.height
-        anchors.top: titleBar.top
+        height: titleBarLabel.height
+        anchors.top: titleBarLabel.top
         anchors.left: parent.left
         anchors.right: comboBoxImage.left
         anchors.leftMargin: parentMargin
@@ -199,97 +161,39 @@ Rectangle {
     }
 
     // Logout Button
-    Button {
+    CustomButton {
         id: logoutButton
-        width: parent.width * 0.18
-        height: titleBar.height
-        anchors.top: titleBar.top
-        anchors.left: titleBar.right
+        width: (mapImageRectangle.width - titleBarLabel.width - componentMargin * 2) / 2
+        height: titleBarLabel.height
+        anchors.top: titleBarLabel.top
+        anchors.left: titleBarLabel.right
         anchors.leftMargin: componentMargin
 
-        background: Rectangle {
-            radius: 12
-            border.color: "#272626"
-            border.width: 2
-        }
+        text: "LOG OUT"
+        normalColor: "#37474F"
+        hoverColor: "#272626"
+        borderColor: "#272626"
 
-        contentItem: Text {
-            text: "LOG OUT"
-            color: "#37474F"
-            // font.pixelSize: parent.height * 0.5
-            fontSizeMode: Text.Fit
-            wrapMode: Text.WordWrap
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
 
         onClicked: dashboard.logOutRequested()
     }
 
     // Close Button
-    Button {
+    CustomButton {
         id: closeButton
-        height: titleBar.height
-        anchors.top: titleBar.top
+        height: titleBarLabel.height
+        anchors.top: titleBarLabel.top
         anchors.left: logoutButton.right
         anchors.right: parent.right
         anchors.leftMargin: componentMargin
         anchors.rightMargin: parentMargin
 
-        background: Rectangle {
-            color: "#D32F2F"
-            radius: 12
-            border.color: "#B71C1C"
-            border.width: 2
-        }
-
-        contentItem: Text {
-            text: "Close Application"
-            color: "white"
-            fontSizeMode: Text.Fit
-            wrapMode: Text.WordWrap
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-        }
+        text: "CLOSE APPLICATION"
+        normalColor: "#D32F2F"
+        hoverColor: "#B71C1C"
+        borderColor: "#B71C1C"
 
         onClicked: Qt.quit()
-    }
-
-    // Navigate Button
-    CustomButton {
-        id: startNavigateButton
-        width: (imageCamera.width - componentMargin) * 0.5
-        height: imageCamera.height * 0.25
-        anchors.left: imageCamera.left
-        anchors.bottom: imageCamera.top
-        anchors.bottomMargin: componentMargin
-
-        text: "Start \n Navigate"
-        normalColor: "#2ecc71" 
-        hoverColor: "#27ae60"
-        borderColor: "#1e8449"
-        onClicked: {
-            viewModelQML.sendMoveCommand("start");
-        }
-    }
-
-    // Stop Navigate Button
-    CustomButton {
-        id: stopNavigateButton
-        width: startNavigateButton.width
-        height: startNavigateButton.height
-        anchors.right: imageCamera.right
-        anchors.bottom: imageCamera.top
-        anchors.bottomMargin: componentMargin
-
-        text: "Stop \n Navigate"
-        normalColor: "#e74c3c" 
-        hoverColor: "#c0392b"
-        borderColor: "#962d22"
-        onClicked: {
-            viewModelQML.sendMoveCommand("stop");
-        }        
     }
 
     // Teleop Joystick
@@ -305,13 +209,15 @@ Rectangle {
         border.width: 2
         border.color: "#BDBDBD"
         color: "#FFFFFF"
+
         Component.onCompleted: {
-            viewModelQML.sendVelocityCommand(0, 0);
+            rosHandlingQML.publishVelocityCommand(0, 0);
         }
+
         Text {
             id: teleopJoystickText
             text: "TELEOP JOYSTICK"
-            color: "#37474F"
+            color: "#34495E"
             font.pixelSize: teleopJoystick.height * 0.05
             font.bold: true
             anchors.top: parent.top
@@ -356,13 +262,21 @@ Rectangle {
             MouseArea {
                 id: joystickMouseArea
                 anchors.fill: outerCircle
+
                 onPressed: {
                     innerCircle.dragging = true
-                    // Cập nhật vị trí ban đầu khi bắt đầu kéo
+                    // Update initial position when drag starts
                     innerCircle.startPosition = Qt.point(innerCircle.x, innerCircle.y)
                 }
                 
                 onPositionChanged: {
+                    if (hermiteCurveQML.getLandmarkPointCount() != 0) {
+                        hermiteCurveQML.clearLandmarkPoints(-1);
+                        canvasMapImage.requestPaint();
+                    }
+                    if (isNavigationMode) {
+                        rosHandlingQML.clearWaypoints();
+                    }
                     if (innerCircle.dragging) {
                         var centerX = outerCircle.width / 2
                         var centerY = outerCircle.height / 2
@@ -380,26 +294,19 @@ Rectangle {
                             innerCircle.y = mouseY - innerCircle.height / 2
                         }
 
-                        var innerCenterY = innerCircle.y + innerCircle.height / 2
-                        var heightValue = (innerCenterY < centerY) ? 1 : -1
+                        var linearSpeed = linearSpeedSlider.value * (1 - innerCircle.y / (centerY - innerCircle.height / 2));
+                        var angularSpeed = angularSpeedSlider.value * (1 - innerCircle.x / (centerX - innerCircle.width / 2));
 
-                        var innerCenterX = innerCircle.x + innerCircle.width / 2
-                        var widthValue = (innerCenterX < centerX) ? 2 : -2
-
-                        dashboard.linearSpeed = linearSpeedSlider.value * (1 - innerCircle.y / (outerCircle.height / 2 - innerCircle.height / 2));
-                        dashboard.angularSpeed = angularSpeedSlider.value * (1 - innerCircle.x / (outerCircle.width / 2 - innerCircle.width / 2));
-                        viewModelQML.sendVelocityCommand(dashboard.linearSpeed, dashboard.angularSpeed);
+                        rosHandlingQML.publishVelocityCommand(linearSpeed, angularSpeed);
                     }
                 }
 
                 onReleased: {
                     innerCircle.dragging = false
-                    // Quay về vị trí trung tâm khi thả
+                    // Return to center position when drag ends
                     innerCircle.x = (outerCircle.width - innerCircle.width) / 2
                     innerCircle.y = (outerCircle.height - innerCircle.height) / 2
-                    dashboard.linearSpeed = 0;
-                    dashboard.angularSpeed = 0;
-                    viewModelQML.sendVelocityCommand(dashboard.linearSpeed, dashboard.angularSpeed);
+                    rosHandlingQML.publishVelocityCommand(0, 0);
                 }
             }
         }
@@ -431,7 +338,7 @@ Rectangle {
 
             Text {
                 id: linearSpeedValue
-                text: linearSpeedSlider.value.toFixed(2)
+                text: linearSpeedSlider.value.toFixed(2) + " m/s"
                 font.pixelSize: 14
                 color: "#212121"
                 anchors.verticalCenter: parent.verticalCenter
@@ -466,11 +373,34 @@ Rectangle {
 
             Text {
                 id: angularSpeedValue
-                text: angularSpeedSlider.value.toFixed(2)
+                text: angularSpeedSlider.value.toFixed(2) + " rad/s"
                 font.pixelSize: 14
                 color: "#212121"
                 anchors.verticalCenter: parent.verticalCenter
             }
+        }
+    }
+
+    // Switch Scenario Button
+    CustomButton {
+        id: switchScenarioButton
+        width: imageCamera.width 
+        height: imageCamera.height * 0.25
+        anchors.left: imageCamera.left
+        anchors.bottom: imageCamera.top
+        anchors.bottomMargin: componentMargin
+
+        text: isNavigationMode ? "Navigation Mode" : "Custom Path Mode"
+        normalColor: isNavigationMode ? "#1fcf7d" : "#3498db"
+        hoverColor: isNavigationMode ? "#1abc9c" : "#2980b9"
+        borderColor: isNavigationMode ? "#16a085" : "#1f6391"
+
+        onClicked: {
+            isNavigationMode = !isNavigationMode;
+            hermiteCurveQML.clearLandmarkPoints(-1);
+            rosHandlingQML.clearWaypoints();
+            virtualWallQML.clearVirtualWall();
+            canvasMapImage.requestPaint();
         }
     }
 
@@ -479,7 +409,7 @@ Rectangle {
         id: robotParameter
         width: comboBoxImage.width
         anchors.top: comboBoxImage.bottom
-        anchors.bottom: startNavigateButton.top
+        anchors.bottom: switchScenarioButton.top
         anchors.topMargin: componentMargin
         anchors.bottomMargin: componentMargin
         anchors.left: comboBoxImage.left
@@ -492,7 +422,7 @@ Rectangle {
         Text {
             id: robotSpeedTitle
             text: "ROBOT SPEED"
-            color: "#37474F"
+            color: "#34495E"
             font.pixelSize: teleopJoystick.height * 0.05
             font.bold: true
             anchors.top: parent.top
@@ -500,82 +430,69 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        Text {
-            id: robotPositionText
-            text: "Current Position:"
-            font.pixelSize: robotSpeedTitle.font.pixelSize
-            font.bold: true
-            color: "#212121"
+        Column {
             anchors.top: robotSpeedTitle.bottom
             anchors.left: parent.left
-            anchors.topMargin: componentMargin * 2
-            anchors.leftMargin: componentMargin
-            horizontalAlignment: Text.AlignLeft            
-        }
-
-        Column {
-            id: positionColumn
-            anchors.top: robotPositionText.bottom
-            anchors.left: parent.left
-            anchors.topMargin: componentMargin * 0.5
-            anchors.leftMargin: componentMargin * 1.5
-            spacing: 5
-
-            Text { text: " - Pos X: " + (robotPose.position_x); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-            Text { text: " - Pos Y: " + (robotPose.position_y); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-            Text { text: " - Angular: " + (robotPose.angular_yaw); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-        }
-
-        Text {
-            id: movementStatusText
-            text: "Movement Status:"
-            font.pixelSize: robotSpeedTitle.font.pixelSize
-            font.bold: true
-            color: "#212121"
-            anchors.top: positionColumn.bottom
-            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.topMargin: componentMargin
             anchors.leftMargin: componentMargin
-            horizontalAlignment: Text.AlignLeft            
+            anchors.rightMargin: componentMargin
+            spacing: componentMargin
+
+            Repeater {
+                model: [
+                    {title: "Current Position", items: [
+                        {text: "-  Pos X: " + (robotPoseMeter[0].toFixed(2)) + " m"},
+                        {text: "-  Pos Y: " + (robotPoseMeter[1].toFixed(2)) + " m"},
+                        {text: "-  Angular: " + (robotPoseMeter[2].toFixed(2)) + " degrees"},
+                    ]},
+                    {title: "Movement Status", items: [
+                        {text: "-  Estimate Distance: " + rosHandlingQML.estimateDistanceQml.toFixed(2) + " m"},
+                        {text: "-  Remaining Distance: " + rosHandlingQML.remainingDistanceQml.toFixed(2) + " m"},
+                    ]},
+                    {title: "Robot Velocity", items: [
+                        {text: "-  Linear velocity: " + rosHandlingQML.speedQml[0].toFixed(2) + " m/s"},
+                        {text: "-  Angular velocity: " + rosHandlingQML.speedQml[1].toFixed(2) + " rad/s"}
+                    ]},
+                    {title: "Battery Status", items: [
+                        {text: "-  Battery Level: Null"},
+                        {text: "-  Battery Voltage: Null"},
+                        {text: "-  Battery Current: Null"}
+                    ]},
+                ]
+
+                Column {
+                    width: parent.width
+                    spacing: componentMargin * 0.5
+
+                    Text {
+                        text: modelData.title
+                        font.pixelSize: robotSpeedTitle.font.pixelSize * 0.9
+                        // font.bold: true
+                        color: "#636363"
+                        horizontalAlignment: Text.AlignLeft
+                        wrapMode: Text.Wrap
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: componentMargin * 0.5
+                        anchors.left: parent.left
+                        anchors.leftMargin: componentMargin * 1.5
+                        Repeater {
+                            model: modelData.items
+                            Text {
+                                text: modelData.text
+                                font.pixelSize: robotSpeedTitle.font.pixelSize * 0.75
+                                color: "#424242"
+                                horizontalAlignment: Text.AlignLeft
+                                wrapMode: Text.Wrap
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-        Column {
-            id: movementColumn
-            anchors.top: movementStatusText.bottom
-            anchors.left: parent.left
-            anchors.topMargin: componentMargin * 0.5
-            anchors.leftMargin: componentMargin * 1.5
-            spacing: 5
-
-            Text { text: " - Estimate Distance: " + (robotPose.position_x).toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-            Text { text: " - Remaining Distance: " + (robotPose.position_y).toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-            Text { text: " - Remaining Time: " + (robotPose.angular_yaw * (180 / Math.PI)).toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-        }
-
-        Text {
-            id: velocityText
-            text: "Robot Velocity:"
-            font.pixelSize: robotSpeedTitle.font.pixelSize
-            font.bold: true
-            color: "#212121"
-            anchors.top: movementColumn.bottom
-            anchors.left: parent.left
-            anchors.topMargin: componentMargin
-            anchors.leftMargin: componentMargin
-            horizontalAlignment: Text.AlignLeft            
-        }
-
-        Column {
-            id: velocityColumn
-            anchors.top: velocityText.bottom
-            anchors.left: parent.left
-            anchors.topMargin: componentMargin * 0.5
-            anchors.leftMargin: componentMargin * 1.5
-            spacing: 5
-
-            Text { text: " - Linear velocity: " + dashboard.linearSpeed.toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-            Text { text: " - Angular velocity: " + dashboard.angularSpeed.toFixed(2); font.pixelSize: robotSpeedTitle.font.pixelSize * 0.8; color: "#424242" }
-        }        
     }
 
     // Destination
@@ -587,8 +504,20 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: teleopJoystick.left
         anchors.bottomMargin: parentMargin
+        anchors.rightMargin: parentMargin
 
+        enabled: isNavigationMode
         clip: true
+        opacity: 1
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        onEnabledChanged: opacity = isNavigationMode ? 1 : 0.7
 
         Rectangle {
             id: titleDestination
@@ -599,7 +528,7 @@ Rectangle {
             color: "#1fcf7d"
             Text {
                 text: "Destination"
-                color: "#37474F"
+                color: "#34495E"
                 font.bold: true
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
@@ -619,23 +548,27 @@ Rectangle {
                 id: goalButtonGrid
                 columns: 2
                 rows: 5
-                spacing: parent.height * 0.05
+                spacing: parent.height * 0.06
                 anchors.fill: parent
-                anchors.margins: parent.height * 0.1
+                anchors.margins: parent.height * 0.08
 
                 Repeater {
                     model: 10
                     CustomButton {
+                        normalColor: "#F48FB1"
+                        hoverColor: "#e76993"
+                        borderColor: "#e07fa0"
+                        textColor: "#EAEAEA"
                         text: "Goal " + (index + 1)
                         width: (goalButtonGrid.width - goalButtonGrid.spacing) / 2
                         height: goalButtonRectangle.height * 0.12
                         onClicked: {
-                            viewModelQML.sendGoal(index);
+                            rosHandlingQML.publishGoal(index);
                         }
                     }
                 }
                 Connections {
-                    target: viewModelQML
+                    target: rosHandlingQML
                     onWaypointsChanged: {
                         canvasMapImage.requestPaint();
                     }
@@ -649,30 +582,48 @@ Rectangle {
         id: imageCamera
         width: comboBoxImage.width
         height: width
-
         anchors.bottom: parent.bottom
         anchors.left: destination.right
         anchors.bottomMargin: parentMargin
         anchors.leftMargin: componentMargin
-
         radius: 12
         border.width: 2
         border.color: "#BDBDBD"
         color: "#FFFFFF"
 
-        Text {
-            text: "CAMERA"
-            color: "#37474F"
-            font.pixelSize: parent.height * 0.1
-            font.bold: true
-            anchors.centerIn: parent
+        WebEngineView {
+            id: webView
+            anchors.fill: parent
+            url: "http://192.168.62.138:8080/stream?view=topic&topic=/armbot_rgb_camera/image_raw"  // URL stream
+            onLoadingChanged: {
+                if (loadRequest.status === WebEngineView.LoadSucceeded) {
+                    imageCamera.visible = true
+                    webView.visible = true
+                    // Inject CSS
+                    var css = `
+                        var img = document.getElementsByTagName('img')[0];
+                        if (img) {
+                            img.style.width = '${imageCamera.width}px';
+                            img.style.height = '${imageCamera.height}px';
+                            img.style.objectFit = 'contain';
+                            img.style.display = 'block';
+                            img.style.margin = '0 auto';
+                        }
+                    `
+                    webView.runJavaScript(css, function(result) {
+                        console.log("CSS injection result:", result)
+                    })
+                } else if (loadRequest.status === WebEngineView.LoadFailed) {
+                    console.log("Failed to load image stream:", loadRequest.errorString)
+                }
+            }
         }
     }
 
     // Map Rectangle
     Rectangle {
         id: mapImageRectangle
-        height: robotParameter.height * 1.3
+        height: robotParameter.height * 1.34
         anchors.top: robotParameter.top
         anchors.left: robotParameter.right
         anchors.right: parent.right
@@ -685,16 +636,18 @@ Rectangle {
         radius: 12
         clip: true
 
-        Connections {
-            target: viewModelQML
-            onRobotPoseChanged: {
-                dashboard.updateRobotPose();                   
-            }
+        Rectangle {
+            anchors.fill: parent
+            color: "transparent"
+            border.color: "grey"
+            border.width: 5
+            radius: 12
+            z: 4
         }
 
         Image {
             id: mapImage
-            width: parent.width 
+            width: parent.width
             height: width * (sourceSize.height / sourceSize.width)
             fillMode: Image.PreserveAspectCrop
             anchors.horizontalCenter: parent.horizontalCenter
@@ -702,90 +655,81 @@ Rectangle {
             visible: !!mapImage.source
             layer.enabled: true
             layer.smooth: true
-            
-            Rectangle {
-                id: robotImageContainer
-                width: dashboard.height * 0.03
-                height: width
-                rotation: -(robotPose.angular_yaw - 90)
-                x: dashboard.robotX - width / 2
-                y: dashboard.robotY - height / 2
-                color: "transparent"
-             
-                Shape {
-                    id: robotIamge
-                    Component.onCompleted: updateRobotPose()
-                    ShapePath {
-                        fillColor: "#e74c3c"
-                        strokeColor: "#c0392b" // Màu viền sẫm hơn để nổi bật
-                        strokeWidth: 2
-                        capStyle: ShapePath.RoundCap // Làm tròn nét vẽ
-                        startX: robotImageContainer.width / 2
-                        startY: 0
-                        PathLine { x: robotImageContainer.width; y: robotImageContainer.height }
-                        PathLine { x: robotImageContainer.width * 0.75; y: robotImageContainer.height * 0.75 }
-                        PathLine { x: robotImageContainer.width / 2; y: robotImageContainer.height / 1.5 }
-                        PathLine { x: robotImageContainer.width * 0.25; y: robotImageContainer.height * 0.75 }
-                        PathLine { x: 0; y: robotImageContainer.height }
-                        PathLine { x: robotImageContainer.width / 2; y: 0 }
-                    }
+            z: 1
+        }
+    
+        Rectangle {
+            id: robotImageContainer
+            width: dashboard.height * 0.02
+            height: width
+            rotation: -(robotPoseMeter[2] - 90)
+
+            Connections {
+                target: rosHandlingQML
+                onRobotPoseChanged: {
+                    dashboard.robotPosePixel = rosHandlingQML.getRobotPosePixel(robotPoseMeter[0], robotPoseMeter[1]);
                 }
             }
-        }
+            
+            x: dashboard.robotPosePixel[0] - width / 2
+            y: dashboard.robotPosePixel[1] - height / 2 - (-mapImageRectangle.height / 2 + mapImage.height / 2)
 
-        Rectangle {
-            anchors.fill: parent
             color: "transparent"
-            border.color: "grey"
-            border.width: 5
-            radius: 12
+            z: 3    
+
+            Shape {
+                id: robotIamge
+                ShapePath {
+                    fillColor: "#e74c3c"
+                    strokeColor: "#c0392b" // Màu viền sẫm hơn để nổi bật
+                    strokeWidth: 2
+                    capStyle: ShapePath.RoundCap // Làm tròn nét vẽ
+                    startX: robotImageContainer.width / 2
+                    startY: 0
+                    PathLine { x: robotImageContainer.width; y: robotImageContainer.height }
+                    PathLine { x: robotImageContainer.width * 0.75; y: robotImageContainer.height * 0.75 }
+                    PathLine { x: robotImageContainer.width / 2; y: robotImageContainer.height / 1.5 }
+                    PathLine { x: robotImageContainer.width * 0.25; y: robotImageContainer.height * 0.75 }
+                    PathLine { x: 0; y: robotImageContainer.height }
+                    PathLine { x: robotImageContainer.width / 2; y: 0 }
+                }
+            }
         }
 
         Canvas {
             id: canvasMapImage
             anchors.fill: mapImage
+            z: 2
 
             MouseArea {
                 id: imageMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
-                property var metterX: null
-                property var metterY: null
 
                 onPressed: {
-                    if (dashboard.isCreatingPoint) {
-                        hermiteCurveQML.addPoint(mouse.x, mouse.y);
-                        dashboard.clickedPoints.push({x: mouse.x, y: mouse.y});
-                    } else if (!dashboard.isCreatingPoint && dashboard.selectedPointIndex == -1) {
-                        for (var i = 0; i < dashboard.clickedPoints.length; ++i) {
-                            var dx = mouse.x - dashboard.clickedPoints[i].x;
-                            var dy = mouse.y - dashboard.clickedPoints[i].y;
+                    if (isCreateLandmark && !isNavigationMode) {
+                        var meterValues = readYamlQML.getConvertPixelToMeter(mouse.x, mouse.y);
+                        hermiteCurveQML.addPoint(meterValues[0], meterValues[1]);
+                    } else if (!isCreateLandmark && selectedPointIndex == -1) {
+                        var landmarkPointsList = hermiteCurveQML.getLandmarkPointsList();
+                        for (var i = 1; i < hermiteCurveQML.getLandmarkPointCount(); ++i) {
+                            var dx = mouse.x - landmarkPointsList[i][0];
+                            var dy = mouse.y - landmarkPointsList[i][1];
                             if (Math.sqrt(dx * dx + dy * dy) < 8) {
-                                dashboard.selectedPointIndex = i;
+                                selectedPointIndex = i;
                                 break;
-                            }
-                        }
-
-                        if (isClearingLandmarkPoint && dashboard.selectedPointIndex != -1) {
-                            dashboard.clickedPoints.splice(dashboard.selectedPointIndex, 1);
-                            hermiteCurveQML.removePoint(dashboard.selectedPointIndex);
-
-                            dashboard.selectedPointIndex = -1;
-                            isClearingLandmarkPoint = false;
-                            isCreatingPoint = true;
-                            creatingPointsButton.enabled = true;
-                            enableEditingButton.enabled = true;
-                            hermiteCurveQML.createCurve();
-                            canvasMapImage.requestPaint();
-
-                            if (dashboard.clickedPoints.length == 0) {
-                                clearLamdmarkPointButton.enabled = false;
                             }
                         }
                     }
 
-                    if (dashboard.clickedPoints.length != 0) {
-                        clearLamdmarkPointButton.enabled = true;
+                    if (isVirtualWallMode && isNavigationMode) {
+                        var meterValues = readYamlQML.getConvertPixelToMeter(mouse.x, mouse.y);
+                        virtualWallQML.addVirtualWallPoint(meterValues[0], meterValues[1]);
+                    }
+
+                    if (isClearingLandmark && selectedPointIndex != -1) {
+                        hermiteCurveQML.clearLandmarkPoints(selectedPointIndex);
+                        selectedPointIndex = -1;
                     }
 
                     hermiteCurveQML.createCurve();
@@ -793,65 +737,92 @@ Rectangle {
                 }
 
                 onPositionChanged: (mouse) => {
-                    let [xRatio, yRatio] = [mouse.x / parent.width, mouse.y / parent.height];
-                    let [PixelX, PixelY] = [Math.round(xRatio * mapImage.sourceSize.width), Math.round(yRatio * mapImage.sourceSize.height)];
-                    
-                    metterX = (PixelX * mapResolution + mapOrigin[0]).toFixed(2);
-                    metterY = -(PixelY * mapResolution - (mapImage.sourceSize.height * mapResolution + mapOrigin[1])).toFixed(2);
+                    let newX = mouse.x;
+                    let newY = mouse.y;
 
-                    pixelText.text = `Pixel: X = ${metterX}, Y = ${metterY}`;
+                    if (newX < 0) newX = 0;
+                    if (newY < 0) newY = 0;
+                    if (newX > mapImage.width) newX = mapImage.width;
+                    if (newY > mapImage.height) newY = mapImage.height;
 
-                    if (dashboard.selectedPointIndex != -1 && dashboard.isMovingPoint) {
-                        let newX = mouse.x;
-                        let newY = mouse.y;
-
-                        if (newX < 0) newX = 0;
-                        if (newY < 0) newY = 0;
-                        if (newX > mapImage.width) newX = mapImage.width;
-                        if (newY > mapImage.height) newY = mapImage.height;
-
-                        dashboard.clickedPoints[dashboard.selectedPointIndex].x = newX;
-                        dashboard.clickedPoints[dashboard.selectedPointIndex].y = newY;
-                        hermiteCurveQML.updatePoint(dashboard.selectedPointIndex, newX, newY);
+                    var meterValues = readYamlQML.getConvertPixelToMeter(newX, newY);
+                    pixelText.text = `Pixel: X = ${meterValues[0].toFixed(2)}, Y = ${meterValues[1].toFixed(2)}`; 
+                    if (selectedPointIndex != -1 && !isCreateLandmark) {
+                        hermiteCurveQML.updatePoint(selectedPointIndex, meterValues[0], meterValues[1]);
                         hermiteCurveQML.createCurve();
                         canvasMapImage.requestPaint();
                     }
                 }
 
                 onReleased: {
-                    dashboard.selectedPointIndex = -1;
+                    selectedPointIndex = -1;
                 }
             }
 
             onPaint: {
                 let ctx = getContext("2d");
                 ctx.clearRect(0, 0, width, height);
-                for (let i = 1; i < dashboard.clickedPoints.length; i++) {
-                    let point = dashboard.clickedPoints[i];
+                let curvePoints = [];
+
+                function drawPath(points, pathColor) {
+                    if (!points || points.length === 0) return;
                     ctx.beginPath();
-                    ctx.arc(point.x, point.y, 8, 0, 2 * Math.PI);
-                    ctx.fillStyle = "red";
+                    for (let i = 0; i < points.length; i++) {
+                        let point = points[i];
+                        let x = point[0];
+                        let y = point[1];
+                        if (i === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    }
+                    ctx.strokeStyle = pathColor;
+                    ctx.stroke();
+                }
+
+                function drawPoint(x, y) {
+                    if (x === undefined || y === undefined) return;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                    ctx.fillStyle = "e76993";
                     ctx.fill();
                 }
 
-                let curvePoints = viewModelQML.waypointsQml;
-                // let curvePoints = hermiteCurveQML.curvePointsQml;
-                ctx.beginPath();
-                for (let i = 0; i < curvePoints.length; i++) {
-                    let segment = curvePoints[i];
-                    let x = segment.x;
-                    let y = segment.y;
-
-                    if (i === 0) {
-                        ctx.moveTo(x[0] + robotImageContainer.width * 0.75, y[0] - robotImageContainer.width * 0.75);
-                    }
-
-                    for (let j = 1; j < x.length; j++) {
-                        ctx.lineTo(x[j] + robotImageContainer.width * 0.75, y[j] - robotImageContainer.width * 0.75);
+                function drawLandmarkPoints(points) {
+                    if (!points || points.length === 0) return;
+                    for (let i = 1; i < points.length; i++) {
+                        let point = points[i];
+                        if (point && point[0] !== undefined && point[1] !== undefined) {
+                            drawPoint(point[0], point[1]);
+                        }
                     }
                 }
-                ctx.strokeStyle = "blue";
-                ctx.stroke();
+
+                if (isNavigationMode) {
+                    curvePoints = rosHandlingQML.waypointsQml;
+                    if (curvePoints.length > 0) {
+                        drawPath(curvePoints, "blue");
+                        drawPoint(curvePoints[curvePoints.length - 1][0], curvePoints[curvePoints.length - 1][1]);
+                    }
+
+                    var pathSize = virtualWallQML.virtualWallPathSize;
+                    if (pathSize > 0) {
+                        for (var i = 0; i < pathSize; ++i) {
+                            var path = virtualWallQML.getVirtualWallPath(i);
+                            drawPath(path, "red");
+                        }
+                        rosHandlingQML.publishVirtualWall();                            
+                    }
+
+                } else if (!isNavigationMode && !isVirtualWallMode) {
+                    hermiteCurveQML.getLandmarkPointCount() === 0 && hermiteCurveQML.addPoint(robotPoseMeter[0], robotPoseMeter[1]);                    
+                    curvePoints = hermiteCurveQML.curvePointsQml;
+                    if (curvePoints.length > 0) {
+                        drawPath(curvePoints, "green");
+                        drawLandmarkPoints(hermiteCurveQML.getLandmarkPointsList());
+                    }
+                }
             }
         }
 
@@ -863,230 +834,277 @@ Rectangle {
             anchors.rightMargin: 10
             font.pixelSize: 14
             color: "black"
+            z: 4
         }
     }
 
-    // Cruise Mode Button
-    Button {
-        id: cruiseModeButton
-        width: height
-        anchors.top: mapImageRectangle.bottom
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.topMargin: componentMargin
-        anchors.bottomMargin: parentMargin
-        anchors.rightMargin: parentMargin
-
-        background: Rectangle {
-            color: "#2fcdd3"
-            radius: 20
-            border.color: "#23b2d6"
-            border.width: 2
-        }
-
-        contentItem: Text {
-            text: "Cruise \n Mode"
-            color: "grey"
-            fontSizeMode: Text.Fit
-            wrapMode: Text.WordWrap
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-
-        onClicked: {
-            viewModelQML.sendVelocityCommand(0.0, 0.5)
-        }
-    }
-
-    // Switch Scenario
-    Button {
-        id: switchScenarioButton
-        width: cruiseModeButton.width
-        height: width
-        anchors.top: cruiseModeButton.top
-        anchors.right: cruiseModeButton.left
-        anchors.rightMargin: componentMargin
-
-        background: Rectangle {
-            color: "#2fd38f"
-            radius: 20
-            border.color: "#529e42"
-            border.width: 2
-        }
-
-        contentItem: Text {
-            text: "Switch Scenario"
-            color: "grey"
-            fontSizeMode: Text.Fit
-            wrapMode: Text.WordWrap
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-
-        onClicked: Qt.quit()
-    }
-
-    // Path Tracking Mode Rectangle
-    Rectangle {
-        id: pathTrackingRectangle
-        height: cruiseModeButton.height
+    // Custom Path Handling
+    Item {
+        id: customPathItem
+        height: startNavigateButton.height
+        width: mapImageRectangle.width * 0.4
         anchors {
-                top: cruiseModeButton.top
-                right: switchScenarioButton.left
-                left: imageCamera.right
-                rightMargin: componentMargin
-                leftMargin: componentMargin
+            top: startNavigateButton.top
+            left: imageCamera.right
+            leftMargin: componentMargin
+        }
+
+        enabled: !isNavigationMode
+        opacity: !isNavigationMode ? 1 : 0.7
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
             }
-        border.color: "#BDBDBD"
-        border.width: 2
-        radius: 12
+        }
 
-        Row {
-            id: buttonRow
-            spacing: parent.width * 0.05
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.centerIn: parent
-            property var diameter: buttonRow.spacing * 3
+        onEnabledChanged: opacity = !isNavigationMode ? 1 : 0.7
 
-            // Create Points Button
-            RoundButton {
-                id: creatingPointsButton
-                width: buttonRow.diameter
-                height: width
-                property real scaleFactor: 1.0
-                scale: scaleFactor
-                Behavior on scale { NumberAnimation { duration: 100; easing.type: Easing.OutQuad } }
+        Label {
+            id: customPathLabelTitle
+            anchors.top: parent.top
+            anchors.left: parent.left
+            height: parent.height * 0.2
 
-                text: dashboard.isCreatingPoint ? "Disable\nCreating" : "Enable\nCreating"
-                font.pixelSize: 14
+            text: "Custom Path Handling"
+            color: "#FFFFFF"
+            font.bold: true
+            verticalAlignment: Text.AlignVCenter
+            padding: componentMargin
 
-                background: Rectangle {
-                    anchors.fill: parent
-                    color: dashboard.isCreatingPoint ? "#3F51B5" : "#C5CAE9"
-                    radius: width / 2
-                    border.color: "black"
-                    border.width: 2
-                    Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutQuad } }
-                }
+            background: Rectangle {
+                color: "#3498db"
+            }
+        }
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onPressed: creatingPointsButton.scaleFactor = 0.9
-                    onReleased: creatingPointsButton.scaleFactor = 1.0
+        Rectangle {
+            id: customPathRectangleHandling
+            anchors.top: customPathLabelTitle.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+
+            color: "#ffffff"
+            border.color: "#3498db"
+            border.width: 2
+
+            Row {
+                id: buttonRow
+                spacing: parent.width * 0.12
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.centerIn: parent
+                property var diameter: buttonRow.spacing * 1.4
+
+                // Enable Editing Button
+                CustomButton {
+                    id: dragLandmarkButton
+                    width: buttonRow.diameter
+                    height: width
+                    text: (!isCreateLandmark && !isClearingLandmark) ? "Drag is \nOn" : "Drag is \nOff"
+
+                    isRound: true
+                    hasGlow: true
+                    isOn: !isCreateLandmark && !isClearingLandmark
+
+                    normalColor: isOn ? "#3498DB" : "#B0BEC5"
+                    hoverColor: isOn ? "#CFD8DC" : "#2E86C1"
+                    borderColor: isOn ? "#2471A3" : "#90A4AE"
+                    glowColor: isOn ? "#3498DB" : "#B0BEC5"
+
                     onClicked: {
-                        dashboard.isCreatingPoint = !dashboard.isCreatingPoint;
-                        dashboard.isMovingPoint = !dashboard.isCreatingPoint;
+                        if (isClearingLandmark) {
+                            isClearingLandmark = false;
+                            isCreateLandmark = false;
+                        } else {
+                            isCreateLandmark = !isCreateLandmark;
+                        }
                     }
                 }
-            }
 
-            // Enable Editing Button
-            RoundButton {
-                id: enableEditingButton
-                width: buttonRow.diameter
-                height: width
-                property real scaleFactor: 1.0
-                scale: scaleFactor
-                Behavior on scale { NumberAnimation { duration: 100; easing.type: Easing.OutQuad } }
+                // Clear Landmark Point Button
+                CustomButton {
+                    id: clearLandmarkButton
+                    width: buttonRow.diameter
+                    height: width
+                    text: (!isCreateLandmark && isClearingLandmark) ? "Clear is \nOn" : "Clear is \nOff"
 
-                text: dashboard.isMovingPoint ? "Disable\nEditing" : "Enable\nEditing"
-                font.pixelSize: 14
+                    isRound: true
+                    hasGlow: true
+                    isOn: isClearingLandmark
 
-                background: Rectangle {
-                    anchors.fill: parent
-                    color: dashboard.isMovingPoint ? "#3F51B5" : "#C5CAE9"
-                    radius: width / 2
-                    border.color: "black"
-                    border.width: 2
-                    Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutQuad } }
-                }
+                    normalColor: isOn ? "#F39C12" : "#B0BEC5"
+                    hoverColor: isOn ? "#CFD8DC" : "#D68910"
+                    borderColor: isOn ? "#B9770E" : "#90A4AE"
+                    glowColor: isOn ? "#F39C12" : "#B0BEC5"
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onPressed: enableEditingButton.scaleFactor = 0.9
-                    onReleased: enableEditingButton.scaleFactor = 1.0
                     onClicked: {
-                        dashboard.isMovingPoint = !dashboard.isMovingPoint;
-                        dashboard.isCreatingPoint = !dashboard.isMovingPoint;
+                        isClearingLandmark = !isClearingLandmark;
+                        if (isClearingLandmark && isCreateLandmark) {
+                            isCreateLandmark = false;
+                        } else if (!isClearingLandmark && !isCreateLandmark) {
+                            isCreateLandmark = true;
+                        }
                     }
                 }
-            }
 
-            // Clear Landmark Point Button
-            RoundButton {
-                id: clearLamdmarkPointButton
-                width: buttonRow.diameter
-                height: width
-                property real scaleFactor: 1.0
-                scale: scaleFactor
-                Behavior on scale { NumberAnimation { duration: 100; easing.type: Easing.OutQuad } }
+                // Clear Curve Button
+                CustomButton {
+                    id: clearCurveButton
+                    width: buttonRow.diameter
+                    height: width
+                    text: "Clear\nCurve"
 
-                text: "Clear\nLandmark"
-                font.pixelSize: 14
+                    isRound: true
 
-                background: Rectangle {
-                    anchors.fill: parent
-                    color: "#F44336"
-                    radius: width / 2
-                    border.color: "black"
-                    border.width: 2
-                }
+                    normalColor: "#E74C3C"
+                    hoverColor: "#C0392B"
+                    borderColor: "#A93226"
 
-                enabled: false
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onPressed: clearLamdmarkPointButton.scaleFactor = 0.9
-                    onReleased: clearLamdmarkPointButton.scaleFactor = 1.0
                     onClicked: {
-                        isClearingLandmarkPoint = true;
-                        isCreatingPoint = false;
-                        isMovingPoint = false;
-                        creatingPointsButton.enabled = false;
-                        enableEditingButton.enabled = false;
-                    }
-                }
-            }
-
-            // Clear Curve Button
-            RoundButton {
-                id: clearCurveButton
-                width: buttonRow.diameter
-                height: width
-                property real scaleFactor: 1.0
-                scale: scaleFactor
-                Behavior on scale { NumberAnimation { duration: 100; easing.type: Easing.OutQuad } }
-
-                text: "Clear\nCurve"
-                font.pixelSize: 14
-
-                background: Rectangle {
-                    anchors.fill: parent
-                    color: "#F44336"
-                    radius: width / 2
-                    border.color: "black"
-                    border.width: 2
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onPressed: clearCurveButton.scaleFactor = 0.9
-                    onReleased: clearCurveButton.scaleFactor = 1.0
-                    onClicked: {
-                        clearLamdmarkPointButton.enabled = false;
-                        dashboard.clickedPoints = [];
-                        hermiteCurveQML.clearLamdmarkPoints();
-                        hermiteCurveQML.clearCurvePoints();
+                        hermiteCurveQML.clearLandmarkPoints(-1);
                         canvasMapImage.requestPaint();
                     }
                 }
             }
         }
     }
+    
+    // Virtual Wall Handling
+    Item {
+        id: virtualWallItem
+        width: customPathItem.width * 0.7
+        height: customPathRectangleHandling.height
+        anchors {
+            bottom: customPathItem.bottom
+            left: customPathItem.right
+            leftMargin: componentMargin
+        }
+
+        enabled: isNavigationMode
+        opacity: isNavigationMode ? 1 : 0.7
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        onEnabledChanged: opacity = isNavigationMode ? 1 : 0.7
+
+        Label {
+            id: virtualWallLabelTitle
+            height: customPathLabelTitle.height
+            anchors.top: parent.top
+            width: parent.width
+
+            text: "Virtual Wall Handling"
+            color: "#333333"
+            font.bold: true
+            verticalAlignment: Text.AlignVCenter
+            padding: componentMargin
+
+            background: Rectangle {
+                color: "#968f2f"
+            }
+        }
+
+        Rectangle {
+            id: virtualWallRectangleHandling
+            anchors.top: virtualWallLabelTitle.bottom
+            width: parent.width
+            anchors.bottom: parent.bottom
+
+            color: "#ffffff"
+            border.color: "#968f2f"
+            border.width: 2
+
+            Row {
+                id: virtualWallButtonRow
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: componentMargin
+                anchors.rightMargin: componentMargin
+                spacing: componentMargin
+
+
+                CustomButton {
+                    text: "Create\nVirtual Wall"
+
+                    hasGlow: true
+                    isOn: isVirtualWallMode
+
+                    normalColor: "#16A085"
+                    hoverColor: "#1ABC9C"
+                    borderColor: "#0E6655"
+
+                    onClicked: {
+                        isVirtualWallMode = !isVirtualWallMode;
+                    }
+                }
+
+                CustomButton {
+                    text: "Clear\nVirtual Wall"
+
+                    normalColor: "#6C3483"
+                    hoverColor: "#8E44AD"
+                    borderColor: "#4A235A"
+
+                    onClicked: {
+                        virtualWallQML.clearVirtualWall();
+                        canvasMapImage.requestPaint();
+                        rosHandlingQML.publishVirtualWall();
+                    }
+                }
+            }
+        }
+    }
+
+    // Start Button
+    CustomButton {
+        id: startNavigateButton
+        width: stopNavigateButton.width
+        height: width
+        anchors.top: stopNavigateButton.top
+        anchors.right: stopNavigateButton.left
+        anchors.rightMargin: componentMargin
+
+        isRound: true
+        text: "Start \n Navigate"
+        normalColor: "#4CAF50" 
+        hoverColor: "#388E3C"
+        borderColor: "#2E7D32"
+        onClicked: {
+            if (isNavigationMode) {
+            rosHandlingQML.publishMoveCommand("start");
+            } else {
+                rosHandlingQML.publishHermitePath();
+            }
+        }
+    }
+
+    // Stop Button
+    CustomButton {
+        id: stopNavigateButton
+        width: height
+        anchors.top: mapImageRectangle.bottom
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.topMargin: componentMargin
+        anchors.bottomMargin: parentMargin
+        anchors.rightMargin: componentMargin * 3
+
+        isRound: true
+
+        text: "Stop \n Navigate"
+        normalColor: "#D32F2F" 
+        hoverColor: "#B71C1C"
+        borderColor: "#9A0007"
+        onClicked: {
+            rosHandlingQML.publishMoveCommand("stop");
+        }        
+    }
 }
+

@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'hermitecurve.h'
+** Meta object code from reading C++ file 'virtualwall.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../include/hermitecurve.h"
+#include "../../include/virtualwall.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'hermitecurve.h' doesn't include <QObject>."
+#error "The header file 'virtualwall.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.8. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,77 +20,70 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_HermiteCurve_t {
-    QByteArrayData data[13];
-    char stringdata0[155];
+struct qt_meta_stringdata_VirtualWall_t {
+    QByteArrayData data[11];
+    char stringdata0[148];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_HermiteCurve_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_VirtualWall_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_HermiteCurve_t qt_meta_stringdata_HermiteCurve = {
+static const qt_meta_stringdata_VirtualWall_t qt_meta_stringdata_VirtualWall = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "HermiteCurve"
-QT_MOC_LITERAL(1, 13, 18), // "curvePointsChanged"
-QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 8), // "addPoint"
-QT_MOC_LITERAL(4, 42, 1), // "x"
-QT_MOC_LITERAL(5, 44, 1), // "y"
-QT_MOC_LITERAL(6, 46, 11), // "updatePoint"
-QT_MOC_LITERAL(7, 58, 5), // "index"
-QT_MOC_LITERAL(8, 64, 19), // "clearLandmarkPoints"
-QT_MOC_LITERAL(9, 84, 21), // "getLandmarkPointCount"
-QT_MOC_LITERAL(10, 106, 21), // "getLandmarkPointsList"
-QT_MOC_LITERAL(11, 128, 11), // "createCurve"
-QT_MOC_LITERAL(12, 140, 14) // "curvePointsQml"
+QT_MOC_LITERAL(0, 0, 11), // "VirtualWall"
+QT_MOC_LITERAL(1, 12, 23), // "virtualWallPathsChanged"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 19), // "addVirtualWallPoint"
+QT_MOC_LITERAL(4, 57, 1), // "x"
+QT_MOC_LITERAL(5, 59, 1), // "y"
+QT_MOC_LITERAL(6, 61, 16), // "clearVirtualWall"
+QT_MOC_LITERAL(7, 78, 24), // "getVirtualWallPointsList"
+QT_MOC_LITERAL(8, 103, 18), // "getVirtualWallPath"
+QT_MOC_LITERAL(9, 122, 5), // "index"
+QT_MOC_LITERAL(10, 128, 19) // "virtualWallPathSize"
 
     },
-    "HermiteCurve\0curvePointsChanged\0\0"
-    "addPoint\0x\0y\0updatePoint\0index\0"
-    "clearLandmarkPoints\0getLandmarkPointCount\0"
-    "getLandmarkPointsList\0createCurve\0"
-    "curvePointsQml"
+    "VirtualWall\0virtualWallPathsChanged\0"
+    "\0addVirtualWallPoint\0x\0y\0clearVirtualWall\0"
+    "getVirtualWallPointsList\0getVirtualWallPath\0"
+    "index\0virtualWallPathSize"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_HermiteCurve[] = {
+static const uint qt_meta_data_VirtualWall[] = {
 
  // content:
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
-       1,   68, // properties
+       5,   14, // methods
+       1,   50, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
 
  // methods: name, argc, parameters, tag, flags
-       3,    2,   50,    2, 0x02 /* Public */,
-       6,    3,   55,    2, 0x02 /* Public */,
-       8,    1,   62,    2, 0x02 /* Public */,
-       9,    0,   65,    2, 0x02 /* Public */,
-      10,    0,   66,    2, 0x02 /* Public */,
-      11,    0,   67,    2, 0x02 /* Public */,
+       3,    2,   40,    2, 0x02 /* Public */,
+       6,    0,   45,    2, 0x02 /* Public */,
+       7,    0,   46,    2, 0x02 /* Public */,
+       8,    1,   47,    2, 0x02 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
 
  // methods: parameters
     QMetaType::Void, QMetaType::Double, QMetaType::Double,    4,    5,
-    QMetaType::Void, QMetaType::Int, QMetaType::Double, QMetaType::Double,    7,    4,    5,
-    QMetaType::Void, QMetaType::Int,    7,
-    QMetaType::Int,
-    QMetaType::QVariantList,
     QMetaType::Void,
+    QMetaType::QVariantList,
+    QMetaType::QVariantList, QMetaType::Int,    9,
 
  // properties: name, type, flags
-      12, QMetaType::QVariantList, 0x00495001,
+      10, QMetaType::Int, 0x00495001,
 
  // properties: notify_signal_id
        0,
@@ -98,28 +91,26 @@ static const uint qt_meta_data_HermiteCurve[] = {
        0        // eod
 };
 
-void HermiteCurve::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void VirtualWall::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<HermiteCurve *>(_o);
+        auto *_t = static_cast<VirtualWall *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->curvePointsChanged(); break;
-        case 1: _t->addPoint((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
-        case 2: _t->updatePoint((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
-        case 3: _t->clearLandmarkPoints((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: { int _r = _t->getLandmarkPointCount();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 5: { QVariantList _r = _t->getLandmarkPointsList();
+        case 0: _t->virtualWallPathsChanged(); break;
+        case 1: _t->addVirtualWallPoint((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 2: _t->clearVirtualWall(); break;
+        case 3: { QVariantList _r = _t->getVirtualWallPointsList();
             if (_a[0]) *reinterpret_cast< QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 6: _t->createCurve(); break;
+        case 4: { QVariantList _r = _t->getVirtualWallPath((*reinterpret_cast< const int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QVariantList*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (HermiteCurve::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&HermiteCurve::curvePointsChanged)) {
+            using _t = void (VirtualWall::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&VirtualWall::virtualWallPathsChanged)) {
                 *result = 0;
                 return;
             }
@@ -127,11 +118,11 @@ void HermiteCurve::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty) {
-        auto *_t = static_cast<HermiteCurve *>(_o);
+        auto *_t = static_cast<VirtualWall *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
-        case 0: *reinterpret_cast< QVariantList*>(_v) = _t->getCurvePointsQml(); break;
+        case 0: *reinterpret_cast< int*>(_v) = _t->getVirtualWallPathSize(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
@@ -140,42 +131,42 @@ void HermiteCurve::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
 #endif // QT_NO_PROPERTIES
 }
 
-QT_INIT_METAOBJECT const QMetaObject HermiteCurve::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject VirtualWall::staticMetaObject = { {
     &QObject::staticMetaObject,
-    qt_meta_stringdata_HermiteCurve.data,
-    qt_meta_data_HermiteCurve,
+    qt_meta_stringdata_VirtualWall.data,
+    qt_meta_data_VirtualWall,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *HermiteCurve::metaObject() const
+const QMetaObject *VirtualWall::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *HermiteCurve::qt_metacast(const char *_clname)
+void *VirtualWall::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_HermiteCurve.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_VirtualWall.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int HermiteCurve::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int VirtualWall::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 5;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
@@ -198,7 +189,7 @@ int HermiteCurve::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void HermiteCurve::curvePointsChanged()
+void VirtualWall::virtualWallPathsChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

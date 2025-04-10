@@ -198,14 +198,35 @@ Qt5Gui_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Gui
 //The directory containing a CMake configuration file for Qt5Network.
 Qt5Network_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Network
 
+//The directory containing a CMake configuration file for Qt5Positioning.
+Qt5Positioning_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Positioning
+
+//The directory containing a CMake configuration file for Qt5PrintSupport.
+Qt5PrintSupport_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5PrintSupport
+
 //The directory containing a CMake configuration file for Qt5Qml.
 Qt5Qml_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Qml
 
 //The directory containing a CMake configuration file for Qt5Quick.
 Qt5Quick_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Quick
 
+//The directory containing a CMake configuration file for Qt5WebChannel.
+Qt5WebChannel_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5WebChannel
+
+//The directory containing a CMake configuration file for Qt5WebEngineCore.
+Qt5WebEngineCore_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5WebEngineCore
+
+//The directory containing a CMake configuration file for Qt5WebEngineWidgets.
+Qt5WebEngineWidgets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5WebEngineWidgets
+
+//The directory containing a CMake configuration file for Qt5WebEngine.
+Qt5WebEngine_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5WebEngine
+
 //The directory containing a CMake configuration file for Qt5WebSockets.
 Qt5WebSockets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5WebSockets
+
+//The directory containing a CMake configuration file for Qt5Widgets.
+Qt5Widgets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets
 
 //The directory containing a CMake configuration file for Qt5.
 Qt5_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5

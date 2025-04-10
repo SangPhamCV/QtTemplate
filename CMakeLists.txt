@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Tìm thư viện
-find_package(Qt5 COMPONENTS Quick WebSockets REQUIRED)
+find_package(Qt5 COMPONENTS Quick WebSockets WebEngineWidgets WebEngine REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
 # Thêm tất cả các tệp .cpp và .h vào danh sách SOURCES và HEADERS
@@ -28,13 +28,14 @@ add_executable(MyQmlProject
     ${SOURCES}
     ${MOC_SOURCES}  # Thêm MOC files vào
     ${RESOURCE_FILES}
-    src/websocket/viewmodel.cpp
 )
 
 # Liên kết thư viện Qt với ứng dụng
 target_link_libraries(MyQmlProject
     PRIVATE Qt5::Quick
     PRIVATE Qt5::WebSockets
+    PRIVATE Qt5::WebEngineWidgets
+    PRIVATE Qt5::WebEngine
 )
 
 # Bao gồm thư mục chứa header

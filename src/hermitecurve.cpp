@@ -1,13 +1,29 @@
 #include "hermitecurve.h"
-#include <iostream>
 
-HermiteCurve::HermiteCurve(QObject *parent, double tension) : QObject(parent), tension(tension) {
-    // landmarkPoints.emplace_back(1, 2);
-    // std::cout << "x: " << landmarkPoints.at(0).x << ", y: " << landmarkPoints.at(0).y << std::endl;
+HermiteCurve::HermiteCurve(QObject *parent, ReadYaml* readYaml, double tension) : QObject(parent), readYaml(readYaml), mtension(tension) {}
+
+std::vector<HermiteCurve::Point> HermiteCurve::createTangentPoints(const std::vector<Point>& points) {
+    std::vector<Point> tangentPoints;
+    if (points.size() < 2) return {};
+
+    for (size_t i = 0; i < points.size(); ++i) {
+        double diffX = 0.0, diffY = 0.0;
+        if (i == 0) {
+            diffX = points[1].x - points[0].x;
+            diffY = points[1].y - points[0].y;
+        } else if (i == points.size() - 1) {
+            diffX = points[i].x - points[i - 1].x;
+            diffY = points[i].y - points[i - 1].y;
+        } else {
+            diffX = points[i + 1].x - points[i - 1].x;
+            diffY = points[i + 1].y - points[i - 1].y;
+        }
+        tangentPoints.push_back({diffX * (1 - mtension), diffY * (1 - mtension)});
+    }
+    return tangentPoints;
 }
 
-std::pair<std::vector<double>, std::vector<double>> HermiteCurve::getCurve(const Point& p0, const Point& t0, 
-                                                                           const Point& p1, const Point& t1) {
+std::vector<HermiteCurve::Point> HermiteCurve::getCurve(const Point& p0, const Point& t0, const Point& p1, const Point& t1) {
     double distance = std::hypot(p1.x - p0.x, p1.y - p0.y);
     int numPoints = static_cast<int>(distance / 0.1);
 
@@ -16,116 +32,101 @@ std::pair<std::vector<double>, std::vector<double>> HermiteCurve::getCurve(const
         t[i] = static_cast<double>(i) / (numPoints - 1);
     }
 
-    std::vector<double> x(numPoints), y(numPoints);
+    std::vector<Point> curvePoints;
+    curvePoints.reserve(numPoints);
     for (int i = 0; i < numPoints; ++i) {
         double h00 = 2 * std::pow(t[i], 3) - 3 * std::pow(t[i], 2) + 1;
         double h10 = std::pow(t[i], 3) - 2 * std::pow(t[i], 2) + t[i];
         double h01 = -2 * std::pow(t[i], 3) + 3 * std::pow(t[i], 2);
         double h11 = std::pow(t[i], 3) - std::pow(t[i], 2);
 
-        x[i] = h00 * p0.x + h10 * t0.x + h01 * p1.x + h11 * t1.x;
-        y[i] = h00 * p0.y + h10 * t0.y + h01 * p1.y + h11 * t1.y;
+        double x = h00 * p0.x + h10 * t0.x + h01 * p1.x + h11 * t1.x;
+        double y = h00 * p0.y + h10 * t0.y + h01 * p1.y + h11 * t1.y;
+
+        curvePoints.push_back({x, y});
     }
-
-    return {x, y};
-}
-
-void HermiteCurve::createTangentPoints() {
-    tangentPoints.clear();
-    if (landmarkPoints.size() < 2) return;
-
-    for (size_t i = 0; i < landmarkPoints.size(); ++i) {
-        double diffX = 0.0, diffY = 0.0;
-
-        if (i == 0) {
-            diffX = landmarkPoints[1].x - landmarkPoints[0].x;
-            diffY = landmarkPoints[1].y - landmarkPoints[0].y;
-        } else if (i == landmarkPoints.size() - 1) {
-            diffX = landmarkPoints[i].x - landmarkPoints[i - 1].x;
-            diffY = landmarkPoints[i].y - landmarkPoints[i - 1].y;
-        } else {
-            diffX = landmarkPoints[i + 1].x - landmarkPoints[i - 1].x;
-            diffY = landmarkPoints[i + 1].y - landmarkPoints[i - 1].y;
-        }
-
-        tangentPoints.push_back({diffX * (1 - tension), diffY * (1 - tension)});
-    }
-}
-
-void HermiteCurve::addPoint(double x, double y) {
-    landmarkPoints.emplace_back(x, y);
-}
-
-void HermiteCurve::updatePoint(int index, double x, double y) {
-    if (index < 0 || index >= static_cast<int>(landmarkPoints.size())) return;
-    landmarkPoints[index] = {x, y};
+    return curvePoints;
 }
 
 void HermiteCurve::createCurve() {
-    curvePoints.clear();
-    if (landmarkPoints.size() < 2) return;
+    mCurvePointsPixel.clear();
+    mCurvePointsMeter.clear();
+    if (mLandmarkPointsPixel.size() < 2) return;
 
-    createTangentPoints();
+    std::vector<HermiteCurve::Point> tangentPoints = createTangentPoints(mLandmarkPointsPixel);
 
-    for (size_t i = 0; i < landmarkPoints.size() - 1; ++i) {
-        auto p0 = landmarkPoints[i];
+    for (size_t i = 0; i < mLandmarkPointsPixel.size() - 1; ++i) {
+        auto p0 = mLandmarkPointsPixel[i];
         auto t0 = tangentPoints[i];
-        auto p1 = landmarkPoints[i + 1];
+        auto p1 = mLandmarkPointsPixel[i + 1];
         auto t1 = tangentPoints[i + 1];
-
-        auto curve = getCurve(p0, t0, p1, t1);
-        curvePoints.push_back(curve);
+        auto curveSegment = getCurve(p0, t0, p1, t1);
+        mCurvePointsPixel.insert(mCurvePointsPixel.end(), curveSegment.begin(), curveSegment.end());
     }
+
+    int step = static_cast<int>(mCurvePointsPixel.size() / 100); // reduce the number of points to 100
+
+    for (size_t i = 0; i < mCurvePointsPixel.size(); i += step) {
+        QPair<double, double> meterPoint = readYaml->convertPixelToMeter(mCurvePointsPixel[i].x, mCurvePointsPixel[i].y);
+        mCurvePointsMeter.emplace_back(meterPoint.first, meterPoint.second);
+    }
+    mCurvePointsMeter.emplace_back(mCurvePointsMeter.back().x, mCurvePointsMeter.back().y);
+    mCurvePointsMeter.shrink_to_fit();
 
     emit curvePointsChanged();    
 }
 
-int HermiteCurve::getCurvePointCount() const {
-    int totalPoints = 0;
-    for (const auto& segment : curvePoints) {
-        totalPoints += segment.first.size();
-    }
-    return totalPoints;
+void HermiteCurve::addPoint(double x, double y) {
+    QPair<double, double> meterPoint = readYaml->convertMeterToPixel(x, y);
+    mLandmarkPointsPixel.emplace_back(meterPoint.first, meterPoint.second);
 }
 
-void HermiteCurve::printCurvePoints() {
-    for (const auto& segment : curvePoints) {
-        for (size_t i = 0; i < segment.first.size(); ++i) {
-            std::cout << "x: " << segment.first[i] << ", y: " << segment.second[i] << std::endl;
-        }
+void HermiteCurve::updatePoint(int index, double x, double y) {
+    if (index < 0 || index >= static_cast<int>(mLandmarkPointsPixel.size())) return;
+    QPair<double, double> meterPoint = readYaml->convertMeterToPixel(x, y);
+    mLandmarkPointsPixel[index] = {meterPoint.first, meterPoint.second};
+}
+
+void HermiteCurve::clearLandmarkPoints(int index) {
+    if (index < -1 || index >= static_cast<int>(mLandmarkPointsPixel.size())) return;
+    else if (index == -1) {
+        mCurvePointsPixel.clear();
+        mCurvePointsMeter.clear();
+        mLandmarkPointsPixel.clear();
+    } else {
+        mLandmarkPointsPixel.erase(mLandmarkPointsPixel.begin() + index);
     }
+}
+
+int HermiteCurve::getLandmarkPointCount() const {
+    return mLandmarkPointsPixel.size();
+}
+
+QVariantList HermiteCurve::getLandmarkPointsList() const {
+    QVariantList landmarkPointsList;
+    landmarkPointsList.reserve(mLandmarkPointsPixel.size());
+    for (const auto &point : mLandmarkPointsPixel) {
+        landmarkPointsList.append(QVariant::fromValue(QVariantList{point.x, point.y}));
+}
+    return landmarkPointsList;
 }
 
 QVariantList HermiteCurve::getCurvePointsQml() const {
-    QVariantList qmlList;
-    for (const auto& segment : curvePoints) {
-        QVariantMap segmentMap;
-        QVariantList xList, yList;
-
-        for (double x : segment.first) {
-            xList.append(x);
-        }
-        for (double y : segment.second) {
-            yList.append(y);
-        }
-
-        segmentMap["x"] = xList;
-        segmentMap["y"] = yList;
-        qmlList.append(segmentMap);
+    QVariantList curvePointsList;
+    curvePointsList.reserve(mCurvePointsPixel.size());
+    for (const auto &point : mCurvePointsPixel) {
+        curvePointsList.append(QVariant::fromValue(QVariantList{point.x, point.y}));
     }
-
-    return qmlList;
+    return curvePointsList;
 }
 
-void HermiteCurve::clearLamdmarkPoints() {
-    landmarkPoints.clear();
+std::vector<HermiteCurve::Point> HermiteCurve::getCurvePointsMeter() const {
+    return mCurvePointsMeter;
 }
 
 void HermiteCurve::clearCurvePoints() {
-    curvePoints.clear();
-}
-
-void HermiteCurve::removePoint(int index) {
-    if (index < 0 || index >= static_cast<int>(landmarkPoints.size())) return;
-    landmarkPoints.erase(landmarkPoints.begin() + index);
+    qDebug() << "Clearing curve points";
+    mCurvePointsPixel.clear();
+    mCurvePointsMeter.clear();
+    emit curvePointsChanged();
 }

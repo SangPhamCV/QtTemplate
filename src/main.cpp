@@ -2,35 +2,30 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "loginhandler.h"
-#include "mainwindow.h"
+#include "readyaml.h"
+#include "filehandler.h"
 #include "hermitecurve.h"
-#include "rosbridgeclient.h"
-#include "websocket/viewmodel.h"
-#include <iostream>
+#include "roshandling.h"
+#include "virtualwall.h"
 
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
     LoginHandler loginHandler;
-    MainWindow mainWindow;
-    ViewModel viewModel(&mainWindow);
-    HermiteCurve hermiteCurve;
-    FileListModel fileListModel;
-    // RosBridgeClient* rosClient = new RosBridgeClient();
+    ReadYaml readYaml;
+    FileHandler fileHandler;
+    HermiteCurve hermiteCurve(nullptr, &readYaml);
+    VirtualWall virtualWall(nullptr, &readYaml);
 
-    // qmlRegisterType<LoginHandler>("myapp.loginhandler", 1, 0, "LoginHandler");
-
-    // rosClient->addStringClient("/string1");
-    // rosClient->addStringClient("/string2");
-    // rosClient->addPoseClient("/amcl_pose");
+    RosHandling rosHandling(&hermiteCurve, &virtualWall, nullptr);
 
     engine.rootContext()->setContextProperty("loginHandlerQML", &loginHandler);
-    engine.rootContext()->setContextProperty("mainWindowQML", &mainWindow);
+    engine.rootContext()->setContextProperty("readYamlQML", &readYaml);
     engine.rootContext()->setContextProperty("hermiteCurveQML", &hermiteCurve);
-    engine.rootContext()->setContextProperty("fileListModelQML", &fileListModel);
-    // engine.rootContext()->setContextProperty("rosBridgeClientQML", rosClient);    
-    engine.rootContext()->setContextProperty("viewModelQML", &viewModel);
+    engine.rootContext()->setContextProperty("fileHandlerQML", &fileHandler);
+    engine.rootContext()->setContextProperty("rosHandlingQML", &rosHandling);
+    engine.rootContext()->setContextProperty("virtualWallQML", &virtualWall);
 
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -1,47 +1,44 @@
 #ifndef HERMITE_CURVE_H
 #define HERMITE_CURVE_H
 
-#include <vector>
 #include <cmath>
-#include <iostream>
-#include <QObject>
-#include <QVariant>
-#include <QDebug>
+#include <readyaml.h>
 
 class HermiteCurve : public QObject {
     Q_OBJECT
     Q_PROPERTY(QVariantList curvePointsQml READ getCurvePointsQml NOTIFY curvePointsChanged)
 
-private:
+public:
     struct Point {
         double x, y;
-        Point(double x_val, double y_val) : x(x_val), y(y_val) {}
+        Point(double _x, double _y) : x(_x), y(_y) {}  // Point Constructor
     };
 
-    std::vector<Point> landmarkPoints;
-    double tension;
-    int arrImageSize[2];
-    std::vector<std::pair<std::vector<double>, std::vector<double>>> curvePoints;
-    std::vector<Point> tangentPoints;
+    explicit HermiteCurve(QObject *parent = nullptr, ReadYaml* readYaml = nullptr, double tension = 0.5);
 
-    std::pair<std::vector<double>, std::vector<double>> getCurve(const Point& p0, const Point& t0, 
-                                                                 const Point& p1, const Point& t1);
-    void createTangentPoints();
-    void printCurvePoints();
-
-public:
-    explicit HermiteCurve(QObject *parent = nullptr, double tension = 0.5);
-
-    Q_INVOKABLE void clearLamdmarkPoints();
-    Q_INVOKABLE void clearCurvePoints();
-    Q_INVOKABLE void removePoint(int index);
-    
     Q_INVOKABLE void addPoint(double x, double y);
     Q_INVOKABLE void updatePoint(int index, double x, double y);
-    Q_INVOKABLE void createCurve();
-    int getCurvePointCount() const;
-    QVariantList getCurvePointsQml() const;
+    Q_INVOKABLE void clearLandmarkPoints(int index);
 
+    Q_INVOKABLE int getLandmarkPointCount() const;
+    Q_INVOKABLE QVariantList getLandmarkPointsList() const;
+    Q_INVOKABLE void createCurve();
+
+    QVariantList getCurvePointsQml() const;
+    std::vector<Point> getCurvePointsMeter() const;
+    void  clearCurvePoints();
+    ReadYaml* getReadYaml() const { return readYaml; }
+
+private:
+    ReadYaml* readYaml;
+    std::vector<Point> mLandmarkPointsPixel;
+    std::vector<Point> mCurvePointsPixel;
+    std::vector<Point> mCurvePointsMeter;
+
+    double mtension;
+
+    std::vector<Point> getCurve(const Point& p0, const Point& t0, const Point& p1, const Point& t1);
+    std::vector<Point> createTangentPoints(const std::vector<Point>& points);
 signals:
     void curvePointsChanged();
 };

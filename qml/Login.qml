@@ -9,13 +9,12 @@ Rectangle {
         anchors.centerIn: parent
         spacing: parent.height * 0.01 
 
-        Text {
+        Label {
             width: parent.width
             id: statusText
             text: loginHandlerQML.statusMessage
             color: "red"
-            font.pixelSize: parent.height * 0.05
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: Label.AlignHCenter
         }
 
         Rectangle {
@@ -57,19 +56,15 @@ Rectangle {
             }
         }
 
-        Button {
+        CustomButton {
             id: loginButton
             text: "Login"
             width: parent.width
             height: parent.height * 0.25
-            font.pixelSize: parent.height * 0.06
 
-            background: Rectangle {
-                radius: 10
-                color: loginButton.pressed ? "#1976D2" : "#2196F3"
-                border.color: "#1565C0"
-                border.width: 1
-            }
+            normalColor: "#2196F3"
+            hoverColor: "#1976D2"
+            borderColor: "#1565C0"
 
             onClicked: {
                 loginHandlerQML.login(usernameField.text, passwordField.text)
@@ -80,23 +75,19 @@ Rectangle {
         }
     }
 
-    Button {
+    CustomButton {
         id: closeButton
-        text: "Close Application"
+        text: "CLOSE APPLICATION"
         width: parent.width * 0.2 
         height: parent.height * 0.08 
-        font.pixelSize: parent.height * 0.04 
-        padding: parent.height * 0.01
+
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: parent.height * 0.03
 
-        background: Rectangle {
-            radius: 12
-            color: closeButton.pressed ? "#B71C1C" : "#D32F2F"
-            border.color: "#F44336"
-            border.width: 2
-        }
+        normalColor: "#D32F2F"
+        hoverColor: "#B71C1C"
+        borderColor: "#9A1919"
 
         onClicked: Qt.quit()
     }

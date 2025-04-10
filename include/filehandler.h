@@ -1,33 +1,17 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef FILEHANDLER_H
+#define FILEHANDLER_H
 
 #include <QObject>
-#include <QString>
 #include <QVariant>
-#include <yaml-cpp/yaml.h>
-#include <QDebug>
-#include <QFile>
 #include <QAbstractListModel>
 #include <QDir>
+#include <QDebug>
 
-class MainWindow : public QObject {
+class FileHandler : public QAbstractListModel {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QObject *parent = nullptr);
-
-    Q_INVOKABLE void readYAML(const QString &filePath);
-    Q_INVOKABLE QVariantMap getYamlValue() const;
-
-private:
-    QVariantMap mYamlData;
-};
-
-class FileListModel : public QAbstractListModel {
-    Q_OBJECT
-
-public:
-    explicit FileListModel(QObject *parent = nullptr);
+    explicit FileHandler(QObject *parent = nullptr);
 
     enum {
         FileNameRole = Qt::UserRole + 1,
@@ -44,5 +28,4 @@ private:
     QStringList mFileNames;
 };
 
-#endif // MAINWINDOW_H
-
+#endif // FILEHANDLER_H

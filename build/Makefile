@@ -123,6 +123,33 @@ MyQmlProject/fast:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/build
 .PHONY : MyQmlProject/fast
 
+include/moc_filehandler.o: include/moc_filehandler.cpp.o
+
+.PHONY : include/moc_filehandler.o
+
+# target to build an object file
+include/moc_filehandler.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_filehandler.cpp.o
+.PHONY : include/moc_filehandler.cpp.o
+
+include/moc_filehandler.i: include/moc_filehandler.cpp.i
+
+.PHONY : include/moc_filehandler.i
+
+# target to preprocess a source file
+include/moc_filehandler.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_filehandler.cpp.i
+.PHONY : include/moc_filehandler.cpp.i
+
+include/moc_filehandler.s: include/moc_filehandler.cpp.s
+
+.PHONY : include/moc_filehandler.s
+
+# target to generate assembly for a file
+include/moc_filehandler.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_filehandler.cpp.s
+.PHONY : include/moc_filehandler.cpp.s
+
 include/moc_hermitecurve.o: include/moc_hermitecurve.cpp.o
 
 .PHONY : include/moc_hermitecurve.o
@@ -177,32 +204,32 @@ include/moc_loginhandler.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_loginhandler.cpp.s
 .PHONY : include/moc_loginhandler.cpp.s
 
-include/moc_mainwindow.o: include/moc_mainwindow.cpp.o
+include/moc_readyaml.o: include/moc_readyaml.cpp.o
 
-.PHONY : include/moc_mainwindow.o
+.PHONY : include/moc_readyaml.o
 
 # target to build an object file
-include/moc_mainwindow.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.o
-.PHONY : include/moc_mainwindow.cpp.o
+include/moc_readyaml.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_readyaml.cpp.o
+.PHONY : include/moc_readyaml.cpp.o
 
-include/moc_mainwindow.i: include/moc_mainwindow.cpp.i
+include/moc_readyaml.i: include/moc_readyaml.cpp.i
 
-.PHONY : include/moc_mainwindow.i
+.PHONY : include/moc_readyaml.i
 
 # target to preprocess a source file
-include/moc_mainwindow.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.i
-.PHONY : include/moc_mainwindow.cpp.i
+include/moc_readyaml.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_readyaml.cpp.i
+.PHONY : include/moc_readyaml.cpp.i
 
-include/moc_mainwindow.s: include/moc_mainwindow.cpp.s
+include/moc_readyaml.s: include/moc_readyaml.cpp.s
 
-.PHONY : include/moc_mainwindow.s
+.PHONY : include/moc_readyaml.s
 
 # target to generate assembly for a file
-include/moc_mainwindow.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_mainwindow.cpp.s
-.PHONY : include/moc_mainwindow.cpp.s
+include/moc_readyaml.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_readyaml.cpp.s
+.PHONY : include/moc_readyaml.cpp.s
 
 include/moc_rosbridgeclient.o: include/moc_rosbridgeclient.cpp.o
 
@@ -231,140 +258,59 @@ include/moc_rosbridgeclient.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_rosbridgeclient.cpp.s
 .PHONY : include/moc_rosbridgeclient.cpp.s
 
-include/websocket/moc_posesubscribeclient.o: include/websocket/moc_posesubscribeclient.cpp.o
+include/moc_roshandling.o: include/moc_roshandling.cpp.o
 
-.PHONY : include/websocket/moc_posesubscribeclient.o
-
-# target to build an object file
-include/websocket/moc_posesubscribeclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.o
-.PHONY : include/websocket/moc_posesubscribeclient.cpp.o
-
-include/websocket/moc_posesubscribeclient.i: include/websocket/moc_posesubscribeclient.cpp.i
-
-.PHONY : include/websocket/moc_posesubscribeclient.i
-
-# target to preprocess a source file
-include/websocket/moc_posesubscribeclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.i
-.PHONY : include/websocket/moc_posesubscribeclient.cpp.i
-
-include/websocket/moc_posesubscribeclient.s: include/websocket/moc_posesubscribeclient.cpp.s
-
-.PHONY : include/websocket/moc_posesubscribeclient.s
-
-# target to generate assembly for a file
-include/websocket/moc_posesubscribeclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_posesubscribeclient.cpp.s
-.PHONY : include/websocket/moc_posesubscribeclient.cpp.s
-
-include/websocket/moc_publishclient.o: include/websocket/moc_publishclient.cpp.o
-
-.PHONY : include/websocket/moc_publishclient.o
+.PHONY : include/moc_roshandling.o
 
 # target to build an object file
-include/websocket/moc_publishclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.o
-.PHONY : include/websocket/moc_publishclient.cpp.o
+include/moc_roshandling.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_roshandling.cpp.o
+.PHONY : include/moc_roshandling.cpp.o
 
-include/websocket/moc_publishclient.i: include/websocket/moc_publishclient.cpp.i
+include/moc_roshandling.i: include/moc_roshandling.cpp.i
 
-.PHONY : include/websocket/moc_publishclient.i
+.PHONY : include/moc_roshandling.i
 
 # target to preprocess a source file
-include/websocket/moc_publishclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.i
-.PHONY : include/websocket/moc_publishclient.cpp.i
+include/moc_roshandling.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_roshandling.cpp.i
+.PHONY : include/moc_roshandling.cpp.i
 
-include/websocket/moc_publishclient.s: include/websocket/moc_publishclient.cpp.s
+include/moc_roshandling.s: include/moc_roshandling.cpp.s
 
-.PHONY : include/websocket/moc_publishclient.s
+.PHONY : include/moc_roshandling.s
 
 # target to generate assembly for a file
-include/websocket/moc_publishclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_publishclient.cpp.s
-.PHONY : include/websocket/moc_publishclient.cpp.s
+include/moc_roshandling.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_roshandling.cpp.s
+.PHONY : include/moc_roshandling.cpp.s
 
-include/websocket/moc_stringsubscribeclient.o: include/websocket/moc_stringsubscribeclient.cpp.o
+include/moc_virtualwall.o: include/moc_virtualwall.cpp.o
 
-.PHONY : include/websocket/moc_stringsubscribeclient.o
+.PHONY : include/moc_virtualwall.o
 
 # target to build an object file
-include/websocket/moc_stringsubscribeclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.o
-.PHONY : include/websocket/moc_stringsubscribeclient.cpp.o
+include/moc_virtualwall.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_virtualwall.cpp.o
+.PHONY : include/moc_virtualwall.cpp.o
 
-include/websocket/moc_stringsubscribeclient.i: include/websocket/moc_stringsubscribeclient.cpp.i
+include/moc_virtualwall.i: include/moc_virtualwall.cpp.i
 
-.PHONY : include/websocket/moc_stringsubscribeclient.i
-
-# target to preprocess a source file
-include/websocket/moc_stringsubscribeclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.i
-.PHONY : include/websocket/moc_stringsubscribeclient.cpp.i
-
-include/websocket/moc_stringsubscribeclient.s: include/websocket/moc_stringsubscribeclient.cpp.s
-
-.PHONY : include/websocket/moc_stringsubscribeclient.s
-
-# target to generate assembly for a file
-include/websocket/moc_stringsubscribeclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_stringsubscribeclient.cpp.s
-.PHONY : include/websocket/moc_stringsubscribeclient.cpp.s
-
-include/websocket/moc_subscribeclient.o: include/websocket/moc_subscribeclient.cpp.o
-
-.PHONY : include/websocket/moc_subscribeclient.o
-
-# target to build an object file
-include/websocket/moc_subscribeclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.o
-.PHONY : include/websocket/moc_subscribeclient.cpp.o
-
-include/websocket/moc_subscribeclient.i: include/websocket/moc_subscribeclient.cpp.i
-
-.PHONY : include/websocket/moc_subscribeclient.i
+.PHONY : include/moc_virtualwall.i
 
 # target to preprocess a source file
-include/websocket/moc_subscribeclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.i
-.PHONY : include/websocket/moc_subscribeclient.cpp.i
+include/moc_virtualwall.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_virtualwall.cpp.i
+.PHONY : include/moc_virtualwall.cpp.i
 
-include/websocket/moc_subscribeclient.s: include/websocket/moc_subscribeclient.cpp.s
+include/moc_virtualwall.s: include/moc_virtualwall.cpp.s
 
-.PHONY : include/websocket/moc_subscribeclient.s
-
-# target to generate assembly for a file
-include/websocket/moc_subscribeclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_subscribeclient.cpp.s
-.PHONY : include/websocket/moc_subscribeclient.cpp.s
-
-include/websocket/moc_viewmodel.o: include/websocket/moc_viewmodel.cpp.o
-
-.PHONY : include/websocket/moc_viewmodel.o
-
-# target to build an object file
-include/websocket/moc_viewmodel.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.o
-.PHONY : include/websocket/moc_viewmodel.cpp.o
-
-include/websocket/moc_viewmodel.i: include/websocket/moc_viewmodel.cpp.i
-
-.PHONY : include/websocket/moc_viewmodel.i
-
-# target to preprocess a source file
-include/websocket/moc_viewmodel.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.i
-.PHONY : include/websocket/moc_viewmodel.cpp.i
-
-include/websocket/moc_viewmodel.s: include/websocket/moc_viewmodel.cpp.s
-
-.PHONY : include/websocket/moc_viewmodel.s
+.PHONY : include/moc_virtualwall.s
 
 # target to generate assembly for a file
-include/websocket/moc_viewmodel.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/websocket/moc_viewmodel.cpp.s
-.PHONY : include/websocket/moc_viewmodel.cpp.s
+include/moc_virtualwall.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/include/moc_virtualwall.cpp.s
+.PHONY : include/moc_virtualwall.cpp.s
 
 qrc_resources.o: qrc_resources.cpp.o
 
@@ -392,6 +338,33 @@ qrc_resources.s: qrc_resources.cpp.s
 qrc_resources.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/qrc_resources.cpp.s
 .PHONY : qrc_resources.cpp.s
+
+src/filehandler.o: src/filehandler.cpp.o
+
+.PHONY : src/filehandler.o
+
+# target to build an object file
+src/filehandler.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/filehandler.cpp.o
+.PHONY : src/filehandler.cpp.o
+
+src/filehandler.i: src/filehandler.cpp.i
+
+.PHONY : src/filehandler.i
+
+# target to preprocess a source file
+src/filehandler.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/filehandler.cpp.i
+.PHONY : src/filehandler.cpp.i
+
+src/filehandler.s: src/filehandler.cpp.s
+
+.PHONY : src/filehandler.s
+
+# target to generate assembly for a file
+src/filehandler.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/filehandler.cpp.s
+.PHONY : src/filehandler.cpp.s
 
 src/hermitecurve.o: src/hermitecurve.cpp.o
 
@@ -474,32 +447,32 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/mainwindow.o: src/mainwindow.cpp.o
+src/readyaml.o: src/readyaml.cpp.o
 
-.PHONY : src/mainwindow.o
+.PHONY : src/readyaml.o
 
 # target to build an object file
-src/mainwindow.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.o
-.PHONY : src/mainwindow.cpp.o
+src/readyaml.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/readyaml.cpp.o
+.PHONY : src/readyaml.cpp.o
 
-src/mainwindow.i: src/mainwindow.cpp.i
+src/readyaml.i: src/readyaml.cpp.i
 
-.PHONY : src/mainwindow.i
+.PHONY : src/readyaml.i
 
 # target to preprocess a source file
-src/mainwindow.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.i
-.PHONY : src/mainwindow.cpp.i
+src/readyaml.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/readyaml.cpp.i
+.PHONY : src/readyaml.cpp.i
 
-src/mainwindow.s: src/mainwindow.cpp.s
+src/readyaml.s: src/readyaml.cpp.s
 
-.PHONY : src/mainwindow.s
+.PHONY : src/readyaml.s
 
 # target to generate assembly for a file
-src/mainwindow.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/mainwindow.cpp.s
-.PHONY : src/mainwindow.cpp.s
+src/readyaml.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/readyaml.cpp.s
+.PHONY : src/readyaml.cpp.s
 
 src/rosbridgeclient.o: src/rosbridgeclient.cpp.o
 
@@ -528,140 +501,59 @@ src/rosbridgeclient.cpp.s:
 	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/rosbridgeclient.cpp.s
 .PHONY : src/rosbridgeclient.cpp.s
 
-src/websocket/posesubscribeclient.o: src/websocket/posesubscribeclient.cpp.o
+src/roshandling.o: src/roshandling.cpp.o
 
-.PHONY : src/websocket/posesubscribeclient.o
-
-# target to build an object file
-src/websocket/posesubscribeclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.o
-.PHONY : src/websocket/posesubscribeclient.cpp.o
-
-src/websocket/posesubscribeclient.i: src/websocket/posesubscribeclient.cpp.i
-
-.PHONY : src/websocket/posesubscribeclient.i
-
-# target to preprocess a source file
-src/websocket/posesubscribeclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.i
-.PHONY : src/websocket/posesubscribeclient.cpp.i
-
-src/websocket/posesubscribeclient.s: src/websocket/posesubscribeclient.cpp.s
-
-.PHONY : src/websocket/posesubscribeclient.s
-
-# target to generate assembly for a file
-src/websocket/posesubscribeclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/posesubscribeclient.cpp.s
-.PHONY : src/websocket/posesubscribeclient.cpp.s
-
-src/websocket/publishclient.o: src/websocket/publishclient.cpp.o
-
-.PHONY : src/websocket/publishclient.o
+.PHONY : src/roshandling.o
 
 # target to build an object file
-src/websocket/publishclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.o
-.PHONY : src/websocket/publishclient.cpp.o
+src/roshandling.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/roshandling.cpp.o
+.PHONY : src/roshandling.cpp.o
 
-src/websocket/publishclient.i: src/websocket/publishclient.cpp.i
+src/roshandling.i: src/roshandling.cpp.i
 
-.PHONY : src/websocket/publishclient.i
+.PHONY : src/roshandling.i
 
 # target to preprocess a source file
-src/websocket/publishclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.i
-.PHONY : src/websocket/publishclient.cpp.i
+src/roshandling.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/roshandling.cpp.i
+.PHONY : src/roshandling.cpp.i
 
-src/websocket/publishclient.s: src/websocket/publishclient.cpp.s
+src/roshandling.s: src/roshandling.cpp.s
 
-.PHONY : src/websocket/publishclient.s
+.PHONY : src/roshandling.s
 
 # target to generate assembly for a file
-src/websocket/publishclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/publishclient.cpp.s
-.PHONY : src/websocket/publishclient.cpp.s
+src/roshandling.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/roshandling.cpp.s
+.PHONY : src/roshandling.cpp.s
 
-src/websocket/stringsubscribeclient.o: src/websocket/stringsubscribeclient.cpp.o
+src/virtualwall.o: src/virtualwall.cpp.o
 
-.PHONY : src/websocket/stringsubscribeclient.o
+.PHONY : src/virtualwall.o
 
 # target to build an object file
-src/websocket/stringsubscribeclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.o
-.PHONY : src/websocket/stringsubscribeclient.cpp.o
+src/virtualwall.cpp.o:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/virtualwall.cpp.o
+.PHONY : src/virtualwall.cpp.o
 
-src/websocket/stringsubscribeclient.i: src/websocket/stringsubscribeclient.cpp.i
+src/virtualwall.i: src/virtualwall.cpp.i
 
-.PHONY : src/websocket/stringsubscribeclient.i
-
-# target to preprocess a source file
-src/websocket/stringsubscribeclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.i
-.PHONY : src/websocket/stringsubscribeclient.cpp.i
-
-src/websocket/stringsubscribeclient.s: src/websocket/stringsubscribeclient.cpp.s
-
-.PHONY : src/websocket/stringsubscribeclient.s
-
-# target to generate assembly for a file
-src/websocket/stringsubscribeclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/stringsubscribeclient.cpp.s
-.PHONY : src/websocket/stringsubscribeclient.cpp.s
-
-src/websocket/subscribeclient.o: src/websocket/subscribeclient.cpp.o
-
-.PHONY : src/websocket/subscribeclient.o
-
-# target to build an object file
-src/websocket/subscribeclient.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.o
-.PHONY : src/websocket/subscribeclient.cpp.o
-
-src/websocket/subscribeclient.i: src/websocket/subscribeclient.cpp.i
-
-.PHONY : src/websocket/subscribeclient.i
+.PHONY : src/virtualwall.i
 
 # target to preprocess a source file
-src/websocket/subscribeclient.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.i
-.PHONY : src/websocket/subscribeclient.cpp.i
+src/virtualwall.cpp.i:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/virtualwall.cpp.i
+.PHONY : src/virtualwall.cpp.i
 
-src/websocket/subscribeclient.s: src/websocket/subscribeclient.cpp.s
+src/virtualwall.s: src/virtualwall.cpp.s
 
-.PHONY : src/websocket/subscribeclient.s
-
-# target to generate assembly for a file
-src/websocket/subscribeclient.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/subscribeclient.cpp.s
-.PHONY : src/websocket/subscribeclient.cpp.s
-
-src/websocket/viewmodel.o: src/websocket/viewmodel.cpp.o
-
-.PHONY : src/websocket/viewmodel.o
-
-# target to build an object file
-src/websocket/viewmodel.cpp.o:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.o
-.PHONY : src/websocket/viewmodel.cpp.o
-
-src/websocket/viewmodel.i: src/websocket/viewmodel.cpp.i
-
-.PHONY : src/websocket/viewmodel.i
-
-# target to preprocess a source file
-src/websocket/viewmodel.cpp.i:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.i
-.PHONY : src/websocket/viewmodel.cpp.i
-
-src/websocket/viewmodel.s: src/websocket/viewmodel.cpp.s
-
-.PHONY : src/websocket/viewmodel.s
+.PHONY : src/virtualwall.s
 
 # target to generate assembly for a file
-src/websocket/viewmodel.cpp.s:
-	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/websocket/viewmodel.cpp.s
-.PHONY : src/websocket/viewmodel.cpp.s
+src/virtualwall.cpp.s:
+	$(MAKE) -f CMakeFiles/MyQmlProject.dir/build.make CMakeFiles/MyQmlProject.dir/src/virtualwall.cpp.s
+.PHONY : src/virtualwall.cpp.s
 
 # Help Target
 help:
@@ -672,36 +564,33 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... MyQmlProject"
+	@echo "... include/moc_filehandler.o"
+	@echo "... include/moc_filehandler.i"
+	@echo "... include/moc_filehandler.s"
 	@echo "... include/moc_hermitecurve.o"
 	@echo "... include/moc_hermitecurve.i"
 	@echo "... include/moc_hermitecurve.s"
 	@echo "... include/moc_loginhandler.o"
 	@echo "... include/moc_loginhandler.i"
 	@echo "... include/moc_loginhandler.s"
-	@echo "... include/moc_mainwindow.o"
-	@echo "... include/moc_mainwindow.i"
-	@echo "... include/moc_mainwindow.s"
+	@echo "... include/moc_readyaml.o"
+	@echo "... include/moc_readyaml.i"
+	@echo "... include/moc_readyaml.s"
 	@echo "... include/moc_rosbridgeclient.o"
 	@echo "... include/moc_rosbridgeclient.i"
 	@echo "... include/moc_rosbridgeclient.s"
-	@echo "... include/websocket/moc_posesubscribeclient.o"
-	@echo "... include/websocket/moc_posesubscribeclient.i"
-	@echo "... include/websocket/moc_posesubscribeclient.s"
-	@echo "... include/websocket/moc_publishclient.o"
-	@echo "... include/websocket/moc_publishclient.i"
-	@echo "... include/websocket/moc_publishclient.s"
-	@echo "... include/websocket/moc_stringsubscribeclient.o"
-	@echo "... include/websocket/moc_stringsubscribeclient.i"
-	@echo "... include/websocket/moc_stringsubscribeclient.s"
-	@echo "... include/websocket/moc_subscribeclient.o"
-	@echo "... include/websocket/moc_subscribeclient.i"
-	@echo "... include/websocket/moc_subscribeclient.s"
-	@echo "... include/websocket/moc_viewmodel.o"
-	@echo "... include/websocket/moc_viewmodel.i"
-	@echo "... include/websocket/moc_viewmodel.s"
+	@echo "... include/moc_roshandling.o"
+	@echo "... include/moc_roshandling.i"
+	@echo "... include/moc_roshandling.s"
+	@echo "... include/moc_virtualwall.o"
+	@echo "... include/moc_virtualwall.i"
+	@echo "... include/moc_virtualwall.s"
 	@echo "... qrc_resources.o"
 	@echo "... qrc_resources.i"
 	@echo "... qrc_resources.s"
+	@echo "... src/filehandler.o"
+	@echo "... src/filehandler.i"
+	@echo "... src/filehandler.s"
 	@echo "... src/hermitecurve.o"
 	@echo "... src/hermitecurve.i"
 	@echo "... src/hermitecurve.s"
@@ -711,27 +600,18 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/mainwindow.o"
-	@echo "... src/mainwindow.i"
-	@echo "... src/mainwindow.s"
+	@echo "... src/readyaml.o"
+	@echo "... src/readyaml.i"
+	@echo "... src/readyaml.s"
 	@echo "... src/rosbridgeclient.o"
 	@echo "... src/rosbridgeclient.i"
 	@echo "... src/rosbridgeclient.s"
-	@echo "... src/websocket/posesubscribeclient.o"
-	@echo "... src/websocket/posesubscribeclient.i"
-	@echo "... src/websocket/posesubscribeclient.s"
-	@echo "... src/websocket/publishclient.o"
-	@echo "... src/websocket/publishclient.i"
-	@echo "... src/websocket/publishclient.s"
-	@echo "... src/websocket/stringsubscribeclient.o"
-	@echo "... src/websocket/stringsubscribeclient.i"
-	@echo "... src/websocket/stringsubscribeclient.s"
-	@echo "... src/websocket/subscribeclient.o"
-	@echo "... src/websocket/subscribeclient.i"
-	@echo "... src/websocket/subscribeclient.s"
-	@echo "... src/websocket/viewmodel.o"
-	@echo "... src/websocket/viewmodel.i"
-	@echo "... src/websocket/viewmodel.s"
+	@echo "... src/roshandling.o"
+	@echo "... src/roshandling.i"
+	@echo "... src/roshandling.s"
+	@echo "... src/virtualwall.o"
+	@echo "... src/virtualwall.i"
+	@echo "... src/virtualwall.s"
 .PHONY : help
 
 
