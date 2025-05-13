@@ -22,7 +22,7 @@ The application connects to a ROS-enabled robot via WebSockets (ROSBridge) and c
 - `/start_tracking` (std_msgs/String): Command to start path tracking
 - `/virtual` (geometry_msgs/PoseArray): Virtual wall boundary points
 
-> **Important Note**: This project implements only the control interface for robot monitoring and interaction. The actual movement algorithms, navigation parameters, and low-level control systems are handled by the ROS backend and are not included in this repository for security reasons.
+> **Important Note**: This project implements only the control interface for robot monitoring and interaction. _Core movement/ navigation algorithms and low-level control systems are managed by the ROS backend and **are not disclosed due to corporate confidentiality policies**._
 
 ## Architecture and Design Patterns
 
