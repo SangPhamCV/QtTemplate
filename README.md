@@ -24,6 +24,8 @@ The application connects to a ROS-enabled robot via WebSockets (ROSBridge) and c
 
 > **Important Note**: This project implements only the control interface for robot monitoring and interaction. _Core movement/ navigation algorithms and low-level control systems are managed by the ROS backend and **are not disclosed due to corporate confidentiality policies**._
 
+---
+
 ## Architecture and Design Patterns
 
 ### Model-View-ViewModel (MVVM) Pattern
@@ -32,7 +34,9 @@ The application follows the MVVM pattern where:
 - **View**: QML files defining the UI (Dashboard.qml, Login.qml)
 - **ViewModel**: QObject-derived classes exposing properties and methods to QML via context properties
 
-### Key Components
+---
+
+## Key Components
 
 #### Backend (C++)
 - **RosHandling**: Manages communication with ROS, handles robot pose and movement commands
@@ -49,6 +53,8 @@ The application follows the MVVM pattern where:
 - **Login.qml**: User authentication interface
 - **CustomButton.qml**: Reusable button component
 
+---
+
 ## Algorithms
 
 ### Hermite Curve Interpolation
@@ -57,6 +63,13 @@ The project uses Hermite curve interpolation for smooth path planning. This algo
 - Uses cubic Hermite spline interpolation to generate smooth curves
 - Implements a tension parameter to control the tightness of curves
 - Creates paths with continuous first derivatives for smooth robot motion
+
+#### 🌀 Example: Robot following a Hermite curve path
+This path is composed of landmarks and allows creating, partially or fully deleting, and relocating them anywhere.
+
+![Hermite Curve Path](media/tracking.gif)
+
+---
 
 ### Virtual Wall Generation
 Virtual walls define boundaries the robot should not cross. The implementation uses:
@@ -73,6 +86,13 @@ The application converts between screen coordinates (pixels) and real-world coor
 - Offset adjustments for UI element positioning
 - YAML configuration parameters for map properties
 
+#### 🛡️ Example: Navigation combined with virtual wall enforcement
+Ability to navigate and avoid virtual walls, which do not exist in real environments.
+
+![Navigation with Virtual Wall](media/navigation.gif)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -84,9 +104,3 @@ The application converts between screen coordinates (pixels) and real-world coor
 mkdir build && cd build
 cmake ..
 make
-```
-
-### Running the Application
-```bash
-./MyQmlProject
-```
