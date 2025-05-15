@@ -64,7 +64,7 @@ The project uses Hermite curve interpolation for smooth path planning. This algo
 - Implements a tension parameter to control the tightness of curves
 - Creates paths with continuous first derivatives for smooth robot motion
 
-#### 🌀 Example: Robot following a Hermite curve path
+#### Example: Robot following a Hermite curve path
 This path is composed of landmarks and allows creating, partially or fully deleting, and relocating them anywhere.
 
 ![Hermite Curve Path](media/tracking.gif)
@@ -86,7 +86,7 @@ The application converts between screen coordinates (pixels) and real-world coor
 - Offset adjustments for UI element positioning
 - YAML configuration parameters for map properties
 
-#### 🛡️ Example: Navigation combined with virtual wall enforcement
+#### Example: Navigation combined with virtual wall enforcement
 Ability to navigate and avoid virtual walls, which do not exist in real environments.
 
 ![Navigation with Virtual Wall](media/navigation.gif)
