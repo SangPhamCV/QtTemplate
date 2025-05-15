@@ -1,4 +1,4 @@
-# QtTemplate Project
+# Robot Control Interface Project
 
 ## Overview
 QtTemplate is a Qt/QML-based application designed for robot monitoring and control through ROS (Robot Operating System). The project provides a user interface for robot navigation, path planning, and virtual boundary creation.
