@@ -36,7 +36,7 @@ void RosHandling::publishMoveCommand(const QString& data) {
     QJsonObject msg;
     msg["data"] = data;
 
-    mRosClient.publishToTopic("/move_command", msg);  // Gửi JSON thay vì QString
+    mRosClient.publishToTopic("/move_command", msg);
 }
 
 void RosHandling::publishHermitePath() {
