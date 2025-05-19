@@ -74,7 +74,7 @@ Button {
         onPressed: btn.scale = 0.9
         onReleased: btn.scale = 1.0
         onClicked: {
-            if (btn.clicked) btn.clicked();  // ✅ Call `onClicked` only if defined
+            if (btn.clicked) btn.clicked(); 
         }
     }
 
