@@ -107,5 +107,5 @@ make
 ```
 
 ### Note
-- Change websocket server at rosbridgeclient.cpp file
-
+- Make sure launched rosbridge websocket at ROS-based
+- Change IP websocket server at rosbridgeclient.cpp
