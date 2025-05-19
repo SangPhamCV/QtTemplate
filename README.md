@@ -104,3 +104,8 @@ Ability to navigate and avoid virtual walls, which do not exist in real environm
 mkdir build && cd build
 cmake ..
 make
+```
+
+### Note
+- Change websocket server at rosbridgeclient.cpp file
+
