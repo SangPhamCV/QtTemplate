@@ -41,7 +41,7 @@ void RosBridgeClient::subscribeToAllTopics() {
 
 void RosBridgeClient::publishToTopic(const QString &topic, const QJsonObject &message) {
     if (!mTopics.contains(topic)) {
-        qWarning() << "Topic" << topic << "chưa được đăng ký.";
+        qWarning() << "Topic" << topic << "not registed.";
         return;
     }
 
