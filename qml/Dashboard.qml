@@ -681,9 +681,9 @@ Rectangle {
                 id: robotIamge
                 ShapePath {
                     fillColor: "#e74c3c"
-                    strokeColor: "#c0392b" // Màu viền sẫm hơn để nổi bật
+                    strokeColor: "#c0392b"
                     strokeWidth: 2
-                    capStyle: ShapePath.RoundCap // Làm tròn nét vẽ
+                    capStyle: ShapePath.RoundCap
                     startX: robotImageContainer.width / 2
                     startY: 0
                     PathLine { x: robotImageContainer.width; y: robotImageContainer.height }
