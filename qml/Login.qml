@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
-    color: "#f0f0f0" // Màu nền nhẹ cho toàn bộ giao diện
+    color: "#f0f0f0"
 
     Column {
         width: parent.width * 0.28
